@@ -1,0 +1,47 @@
+services:
+  vllm:
+    image: lmcache/vllm-openai:v0.3.14
+    container_name: vllm-server
+    ports:
+      - "8000:8000"                                                                   
+      - "8001:8001"                                                                   
+      - "8200:8200"
+    extra_hosts:                                                                      
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      - ./lmcache_config.yaml:/etc/lmcache/config.yaml      
+      - ./bench-dataset:/bench-dataset                               
+      
+    shm_size: '16gb'
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    environment:
+      - HF_TOKEN=${HF_TOKEN:-}
+      - LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:/usr/local/cuda/lib64
+      # - LMCACHE_CONFIG_FILE=/etc/lmcache/config.yaml
+      - PYTHONHASHSEED=123
+    command: >
+      ${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}
+      --trust-remote-code
+      --host 0.0.0.0
+      --port 8000
+      --dtype half
+      --max-model-len 32768
+      --gpu-memory-utilization 0.95
+      --swap-space 4
+      --kv-cache-dtype fp8
+      --block-size 16
+      --max-num-batched-tokens 32768
+      --max-num-seqs 8
+      --scheduling-policy fcfs
+      --enable-chunked-prefill
+      --async-scheduling
+      --enable-prefix-caching
+      --allowed-local-media-path /bench-dataset/
+      --limit-mm-per-prompt '{"image": 1}'
