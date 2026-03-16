@@ -16,8 +16,6 @@ HF_CACHE="$HOME/.cache/huggingface"
 _python() {
   if [[ -x "${SCRIPT_DIR}/.venv/bin/python" ]]; then
     "${SCRIPT_DIR}/.venv/bin/python" "$@"
-  elif [[ -x "${SCRIPT_DIR}/.conda_env/bin/python" ]]; then
-    "${SCRIPT_DIR}/.conda_env/bin/python" "$@"
   else
     python3 "$@"
   fi
