@@ -7,7 +7,7 @@ set +a
 # ============================================================
 #  공통 설정
 # ============================================================
-BENCH_IMAGE="lmcache/vllm-openai:v0.3.14"
+BENCH_IMAGE="${IMAGE_NAME}"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 BENCH_DIR="$(pwd)/bench-dataset"
 HF_CACHE="$HOME/.cache/huggingface"
