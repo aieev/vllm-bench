@@ -106,7 +106,7 @@ check_data() {
       local f="${BENCH_DIR}/looglev2_long.jsonl"
       if [[ ! -f "$f" ]]; then
         echo "🔄 [looglev2] LooGLE-v2 다운로드 + 변환 중..."
-        _python "${SCRIPT_DIR}/bench-dataset/convert_looglev2.py" \
+        _python "${SCRIPT_DIR}/scripts/convert_looglev2.py" \
           --max-context-chars 80000 \
           --num-samples 100 \
           --output "$f"
@@ -118,7 +118,7 @@ check_data() {
       local shuffled="${BENCH_DIR}/gqa_data/gqa_shuffled.json"
       if [[ ! -f "$sorted" || ! -f "$shuffled" ]]; then
         echo "🔄 [gqa] GQA 이미지 다운로드 + 변환 중..."
-        _python "${SCRIPT_DIR}/bench-dataset/convert_gqa.py" \
+        _python "${SCRIPT_DIR}/scripts/convert_gqa.py" \
           --max-images 398 \
           --output-dir "${BENCH_DIR}/gqa_data"
       fi

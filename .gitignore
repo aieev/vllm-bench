@@ -4,18 +4,5 @@
 __pycache__/
 *.pyc
 
-# 원본 데이터셋 (check_data 함수가 자동 다운로드/변환)
-bench-dataset/ShareGPT_V3_unfiltered_cleaned_split.json
-bench-dataset/sharegpt4v_coco_only.json
-bench-dataset/sharegpt4v_instruct_gpt4-vision_cap100k.json
-bench-dataset/BurstGPT_without_fails_2.csv
-bench-dataset/coco/
-bench-dataset/train2017.zip
-bench-dataset/ShareGPT4Video/
-bench-dataset/gqa_data/gqa_images/
-bench-dataset/dreambenchpp_data.json
-bench-dataset/dreambenchpp_data/images/
-bench-dataset/question.jsonl
-
-# 벤치마크 결과 (재생성 가능)
-bench-dataset/results/
+# 데이터셋 전체 (check_data 함수가 자동 다운로드/변환)
+bench-dataset/*
