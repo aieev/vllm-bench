@@ -12,7 +12,6 @@ services:
       - ~/.cache/huggingface:/root/.cache/huggingface
       - ./lmcache_config.yaml:/etc/lmcache/config.yaml      
       - ./bench-dataset:/bench-dataset                               
-      
     shm_size: '16gb'
     deploy:
       resources:
@@ -27,7 +26,7 @@ services:
       # - LMCACHE_CONFIG_FILE=/etc/lmcache/config.yaml
       - PYTHONHASHSEED=123
     command: >
-      ${MODEL_NAME:-Qwen/Qwen3-4B-Instruct-2507}
+      ${MODEL_NAME:-Qwen/Qwen3-VL-4B-Instruct}
       --trust-remote-code
       --host 0.0.0.0
       --port 8000
@@ -37,11 +36,17 @@ services:
       --swap-space 4
       --kv-cache-dtype fp8
       --block-size 16
-      --max-num-batched-tokens 32768
+      --max-num-batched-tokens 8192
       --max-num-seqs 8
       --scheduling-policy fcfs
-      --enable-chunked-prefill
       --async-scheduling
+      --enable-chunked-prefill
       --enable-prefix-caching
+      --enable-prompt-tokens-details
       --allowed-local-media-path /bench-dataset/
-      --limit-mm-per-prompt '{"image": 1}'
+      --enable-log-requests
+      --enable-log-outputs
+      --uvicorn-log-level debug
+      --limit-mm-per-prompt '{"image": 5}'
+      --mm-processor-cache-gb 4
+      --mm-processor-cache-type lru

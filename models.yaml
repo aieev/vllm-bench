@@ -1,7 +1,0 @@
-models:
-  - ministral/Ministral-3b-instruct
-  - mistralai/Mistral-7B-Instruct-v0.3
-  - mistralai/Ministral-3-14B-Reasoning-2512
-  - openai/gpt-oss-safeguard-20b
-  - zai-org/GLM-4-32B-0414
-  - facebook/opt-125m
