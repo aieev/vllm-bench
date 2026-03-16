@@ -83,8 +83,15 @@ check_data() {
       local f="${BENCH_DIR}/sharegpt4v_coco_only.json"
       if [[ ! -f "$f" ]]; then
         echo "📥 [sharegpt_image] ShareGPT4V (COCO only) 다운로드 중..."
-        _hf_download "Lin-Chen/ShareGPT4V" "sharegpt4v_coco_only.json"
+        wget -q --show-progress \
+          -O "${BENCH_DIR}/coco/train2017.zip" \
+          "http://images.cocodataset.org/zips/train2017.zip"
+        echo "  📦 압축 해제 중..."
+        unzip -q "${BENCH_DIR}/coco/train2017.zip" -d "${BENCH_DIR}/coco/"
+        
+        rm "${BENCH_DIR}/coco/train2017.zip"
       fi
+      
       ;;
 
     burstgpt)
