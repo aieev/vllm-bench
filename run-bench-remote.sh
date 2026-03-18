@@ -1,7 +1,13 @@
 #!/bin/bash
 set -euo pipefail
+ENV_FILE="$(dirname "$0")/.env"
+if [[ ! -f "$ENV_FILE" ]]; then
+  echo "❌ .env 파일이 없습니다. .env.example을 복사하여 설정하세요:"
+  echo "   cp .env.example .env"
+  exit 1
+fi
 set -a
-source "$(dirname "$0")/.env"
+source "$ENV_FILE"
 set +a
 
 # ============================================================
@@ -130,11 +136,11 @@ check_data() {
       if [[ ! -f "$f" ]]; then
         echo "📥 [burstgpt] BurstGPT 다운로드 중..."
         mkdir -p "${BENCH_DIR}"
-        curl -L -o "$f" "https://github.com/HPMLL/BurstGPT/releases/download/v1.1/BurstGPT_without_fails_2.csv"
+        curl -fL -o "$f" "https://github.com/HPMLL/BurstGPT/releases/download/v1.1/BurstGPT_without_fails_2.csv"
       fi
       ;;
 
-    vision_arena|instructor_coder|mt_bench|prefix_repetition|blazedit|aimo)
+    instructor_coder|mt_bench|prefix_repetition|blazedit|aimo|random_32k|random_128k)
       ;;
 
     *)
@@ -317,7 +323,7 @@ Usage: $0 [벤치마크이름 ...]
 
   환경 변수:
     REQUEST_RATE    초당 요청 수 (선택, 미설정시 각 워크로드 기본값)
-    MAX_CONCURRENCY 최대 동시 요청 수 (선택)
+    MAX_CONCURRENCY 최대 동시 요청 수 (기본값: 32)
 
   사전 준비:
     uv pip install vllm huggingface_hub datasets
@@ -380,7 +386,7 @@ run_bench() {
       local latest_result
       latest_result=$(ls -t "${BENCH_DIR}/results/"*.json 2>/dev/null | head -1)
       if [[ -n "$latest_result" ]]; then
-        _python "${SCRIPT_DIR}/scripts/analyze_results.py" --summary-only "$latest_result" 2>/dev/null || true
+        _python "${SCRIPT_DIR}/scripts/analyze_results.py" --summary-only "$latest_result" || true
       fi
     else
       local elapsed=$(( $(date +%s) - start_ts ))

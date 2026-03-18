@@ -71,7 +71,7 @@ def analyze_file(path):
         "output_throughput": data.get("output_throughput", 0),
         "per_req_tps_mean": statistics.mean(per_request_tps),
         "per_req_tps_median": statistics.median(per_request_tps),
-        "per_req_tps_p99": percentile(per_request_tps, 1),
+        "per_req_tps_p1": percentile(per_request_tps, 1),
         "per_req_tps_std": statistics.stdev(per_request_tps) if len(per_request_tps) > 1 else 0,
         "e2e_mean": statistics.mean(e2e_latencies),
         "e2e_median": statistics.median(e2e_latencies),
@@ -163,7 +163,7 @@ def print_single(r):
     print(f"  Per-request TPS (output_tokens / e2e_latency):")
     print(f"    Mean:         {r['per_req_tps_mean']:.2f} tok/s")
     print(f"    Median:       {r['per_req_tps_median']:.2f} tok/s")
-    print(f"    P1 (worst):   {r['per_req_tps_p99']:.2f} tok/s")
+    print(f"    P1 (worst):   {r['per_req_tps_p1']:.2f} tok/s")
     print(f"    Std:          {r['per_req_tps_std']:.2f}")
     print()
     print(f"  E2E Latency:")
@@ -188,28 +188,17 @@ def print_comparison_table(results):
     print("-" * len(header))
 
     for r in results:
-        label = concurrency_label(r)
+        cols = []
         if has_workload:
-            print(
-                f"{r['workload'] or '?':<20} "
-                f"{label:<18} "
-                f"{r['output_throughput']:>10.1f} "
-                f"{r['per_req_tps_mean']:>13.1f} "
-                f"{r['per_req_tps_median']:>12.1f} "
-                f"{r['per_req_tps_p99']:>11.1f} "
-                f"{r['e2e_mean']:>9.2f}s "
-                f"{r['mean_ttft_ms']:>9.1f}ms"
-            )
-        else:
-            print(
-                f"{label:<18} "
-                f"{r['output_throughput']:>10.1f} "
-                f"{r['per_req_tps_mean']:>13.1f} "
-                f"{r['per_req_tps_median']:>12.1f} "
-                f"{r['per_req_tps_p99']:>11.1f} "
-                f"{r['e2e_mean']:>9.2f}s "
-                f"{r['mean_ttft_ms']:>9.1f}ms"
-            )
+            cols.append(f"{r['workload'] or '?':<20}")
+        cols.append(f"{concurrency_label(r):<18}")
+        cols.append(f"{r['output_throughput']:>10.1f}")
+        cols.append(f"{r['per_req_tps_mean']:>13.1f}")
+        cols.append(f"{r['per_req_tps_median']:>12.1f}")
+        cols.append(f"{r['per_req_tps_p1']:>11.1f}")
+        cols.append(f"{r['e2e_mean']:>9.2f}s")
+        cols.append(f"{r['mean_ttft_ms']:>9.1f}ms")
+        print(" ".join(cols))
 
 
 def generate_matrix_rows(results):
@@ -244,23 +233,24 @@ def main():
     parser.add_argument("--generate-rows", action="store_true", help="Generate markdown table rows from results with metadata")
     args = parser.parse_args()
 
-    files = args.files
-    if args.workload:
-        files = [f for f in files if args.workload in os.path.basename(f)]
-
     results = []
-    for path in files:
+    for path in args.files:
         if not Path(path).exists():
             print(f"⚠️  File not found: {path}", file=sys.stderr)
             continue
-        r = analyze_file(path)
-        if r:
-            if args.workload and r["workload"] and args.workload not in r["workload"]:
-                if args.workload not in os.path.basename(path):
-                    continue
-            results.append(r)
-        else:
+        try:
+            r = analyze_file(path)
+        except (json.JSONDecodeError, KeyError, OSError) as e:
+            print(f"⚠️  Failed to parse {os.path.basename(path)}: {e}", file=sys.stderr)
+            continue
+        if not r:
             print(f"⚠️  No detailed data in: {os.path.basename(path)}", file=sys.stderr)
+            continue
+        if args.workload:
+            wl = r.get("workload", "") or ""
+            if args.workload not in wl and args.workload not in os.path.basename(path):
+                continue
+        results.append(r)
 
     if not results:
         print("No valid results to analyze.", file=sys.stderr)
