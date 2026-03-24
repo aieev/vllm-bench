@@ -18,7 +18,6 @@ BENCH_DIR="$(pwd)/bench-dataset"
 BASE_URL="${VLLM_BASE_URL:?VLLM_BASE_URL must be set in .env}"
 API_KEY="${VLLM_API_KEY:-}"
 TOKENIZER="${VLLM_TOKENIZER:-${MODEL_NAME}}"
-TOKENIZER_MODE="${VLLM_TOKENIZER_MODE:-}"
 REQUEST_RATE="${REQUEST_RATE:-}"
 MAX_CONCURRENCY="${MAX_CONCURRENCY:-32}"
 NUM_PROMPTS="${NUM_PROMPTS:-}"
@@ -88,9 +87,6 @@ _common_args() {
   local args="--save-result --save-detailed --result-dir ${BENCH_DIR}/results"
   args+=" --base-url ${BASE_URL}"
   args+=" --tokenizer ${TOKENIZER}"
-  if [[ -n "${TOKENIZER_MODE}" ]]; then
-    args+=" --tokenizer-mode ${TOKENIZER_MODE}"
-  fi
   args+=" --trust-remote-code"
   args+=" --ready-check-timeout-sec 0"
   if [[ -n "${REQUEST_RATE}" ]]; then
@@ -304,7 +300,6 @@ Usage: $0 [벤치마크이름 ...]
     VLLM_BASE_URL        원격 서버 URL (필수)
     VLLM_API_KEY         API 키 (선택)
     VLLM_TOKENIZER       토크나이저 (선택, 기본값: MODEL_NAME)
-    VLLM_TOKENIZER_MODE  토크나이저 모드 (Mistral 모델: mistral)
 
   환경 변수:
     MAX_CONCURRENCY  최대 동시 요청 수 (기본값: 32)
@@ -319,8 +314,6 @@ Examples:
   $0 apps_coding random_1k random_10k                    # 여러 개 연속 실행
   $0 all                                                # 전체 실행 (OpenRouter 5개)
   MAX_CONCURRENCY=16 NUM_PROMPTS=50 $0 all               # 설정 오버라이드
-  VLLM_TOKENIZER_MODE=mistral $0 apps_coding             # Mistral 모델
-
 Available benchmarks:
 $(printf '  - %s\n' "${ALL_BENCHMARKS[@]}")
   - all (전체 실행)
