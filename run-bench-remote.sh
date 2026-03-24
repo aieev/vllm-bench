@@ -20,6 +20,7 @@ API_KEY="${VLLM_API_KEY:-}"
 TOKENIZER="${VLLM_TOKENIZER:-${MODEL_NAME}}"
 REQUEST_RATE="${REQUEST_RATE:-}"
 MAX_CONCURRENCY="${MAX_CONCURRENCY:-32}"
+NUM_PROMPTS="${NUM_PROMPTS:-}"
 
 GPU_NAME="${GPU_NAME:-}"
 GPU_MEM_UTIL="${GPU_MEM_UTIL:-}"
@@ -47,19 +48,6 @@ _vllm_bench() {
   OPENAI_API_KEY="${API_KEY}" "${cmd}" bench serve "$@"
 }
 
-_hf_download() {
-  local repo_id="$1" filename="$2" repo_type="${3:-dataset}"
-  _python - "$repo_id" "$filename" "$repo_type" "${BENCH_DIR}/${filename}" <<'PYEOF'
-import sys, shutil, os
-from huggingface_hub import hf_hub_download
-repo_id, filename, repo_type, dest = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
-os.makedirs(os.path.dirname(dest), exist_ok=True)
-src = hf_hub_download(repo_id=repo_id, filename=filename, repo_type=repo_type)
-shutil.copy(src, dest)
-print(f"  → {dest}")
-PYEOF
-}
-
 _get_cache_metrics() {
   local auth_header=()
   if [[ -n "${API_KEY}" ]]; then
@@ -83,6 +71,14 @@ _print_cache_stats() {
     echo "  📊 Prefix Cache: ${delta_queries} queries, ${delta_hits} hits (${hit_rate}% hit rate)"
   else
     echo "  📊 Prefix Cache: no queries during this benchmark"
+  fi
+}
+
+_default_prompts() {
+  if [[ -n "${NUM_PROMPTS}" ]]; then
+    echo "--num-prompts ${NUM_PROMPTS}"
+  else
+    echo "--num-prompts $1"
   fi
 }
 
@@ -122,25 +118,7 @@ check_data() {
   local name="$1"
   case "$name" in
 
-    sharegpt)
-      local f="${BENCH_DIR}/ShareGPT_V3_unfiltered_cleaned_split.json"
-      if [[ ! -f "$f" ]]; then
-        echo "📥 [sharegpt] ShareGPT_V3 다운로드 중..."
-        _hf_download "anon8231489123/ShareGPT_Vicuna_unfiltered" \
-          "ShareGPT_V3_unfiltered_cleaned_split.json"
-      fi
-      ;;
-
-    burstgpt)
-      local f="${BENCH_DIR}/BurstGPT_without_fails_2.csv"
-      if [[ ! -f "$f" ]]; then
-        echo "📥 [burstgpt] BurstGPT 다운로드 중..."
-        mkdir -p "${BENCH_DIR}"
-        curl -fL -o "$f" "https://github.com/HPMLL/BurstGPT/releases/download/v1.1/BurstGPT_without_fails_2.csv"
-      fi
-      ;;
-
-    instructor_coder|mt_bench|prefix_repetition|blazedit|aimo|random_32k|random_128k)
+    apps_coding|vision_single|random_1k|random_10k|random_100k|sharegpt|mt_bench|blazedit)
       ;;
 
     *)
@@ -191,40 +169,89 @@ wait_vllm_ready() {
 #  벤치마크 워크로드 정의
 # ============================================================
 
-sharegpt() {
-  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
-    --backend openai-chat \
-    --model "${MODEL_NAME}" \
-    --endpoint /v1/chat/completions \
-    --dataset-name sharegpt \
-    --dataset-path "${BENCH_DIR}/ShareGPT_V3_unfiltered_cleaned_split.json" \
-    --request-rate 50 \
-    --num-prompts 500
-}
-
-prefix_repetition() {
-  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
-    --backend openai \
-    --model "${MODEL_NAME}" \
-    --endpoint /v1/completions \
-    --dataset-name prefix_repetition \
-    --prefix-repetition-prefix-len 512 \
-    --prefix-repetition-suffix-len 128 \
-    --prefix-repetition-num-prefixes 5 \
-    --prefix-repetition-output-len 128 \
-    --request-rate 200 \
-    --num-prompts 500
-}
-
-instructor_coder() {
+apps_coding() {
   _vllm_bench $(_common_args "${FUNCNAME[0]}") \
     --backend openai-chat \
     --model "${MODEL_NAME}" \
     --endpoint /v1/chat/completions \
     --dataset-name hf \
-    --dataset-path likaixin/InstructCoder \
-    --request-rate 200 \
-    --num-prompts 500
+    --dataset-path zed-industries/zeta \
+    $(_default_prompts 500)
+}
+
+vision_single() {
+  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
+    --backend openai-chat \
+    --model "${MODEL_NAME}" \
+    --endpoint /v1/chat/completions \
+    --dataset-name random-mm \
+    --random-input-len 1024 \
+    --random-output-len 1024 \
+    --random-mm-base-items-per-request 1 \
+    --random-mm-limit-mm-per-prompt '{"image": 1, "video": 0}' \
+    --random-mm-bucket-config '{(1024, 1024, 1): 1.0}' \
+    $(_default_prompts 500)
+}
+
+random_1k() {
+  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
+    --backend openai-chat \
+    --model "${MODEL_NAME}" \
+    --endpoint /v1/chat/completions \
+    --dataset-name random \
+    --random-input-len 1024 \
+    --random-output-len 256 \
+    $(_default_prompts 500)
+}
+
+random_10k() {
+  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
+    --backend openai-chat \
+    --model "${MODEL_NAME}" \
+    --endpoint /v1/chat/completions \
+    --dataset-name random \
+    --random-input-len 10240 \
+    --random-output-len 256 \
+    $(_default_prompts 500)
+}
+
+random_100k() {
+  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
+    --backend openai-chat \
+    --model "${MODEL_NAME}" \
+    --endpoint /v1/chat/completions \
+    --dataset-name random \
+    --random-input-len 102400 \
+    --random-output-len 256 \
+    $(_default_prompts 500)
+}
+
+
+# ============================================================
+#  추가 워크로드 (all에 미포함, 개별 실행 가능)
+# ============================================================
+
+sharegpt() {
+  local f="${BENCH_DIR}/ShareGPT_V3_unfiltered_cleaned_split.json"
+  if [[ ! -f "$f" ]]; then
+    echo "📥 [sharegpt] ShareGPT_V3 다운로드 중..."
+    _python - "anon8231489123/ShareGPT_Vicuna_unfiltered" "ShareGPT_V3_unfiltered_cleaned_split.json" "dataset" "${f}" <<'PYEOF'
+import sys, shutil, os
+from huggingface_hub import hf_hub_download
+repo_id, filename, repo_type, dest = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+os.makedirs(os.path.dirname(dest), exist_ok=True)
+src = hf_hub_download(repo_id=repo_id, filename=filename, repo_type=repo_type)
+shutil.copy(src, dest)
+print(f"  → {dest}")
+PYEOF
+  fi
+  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
+    --backend openai-chat \
+    --model "${MODEL_NAME}" \
+    --endpoint /v1/chat/completions \
+    --dataset-name sharegpt \
+    --dataset-path "${f}" \
+    $(_default_prompts 500)
 }
 
 mt_bench() {
@@ -234,8 +261,7 @@ mt_bench() {
     --endpoint /v1/chat/completions \
     --dataset-name hf \
     --dataset-path philschmid/mt-bench \
-    --request-rate 5 \
-    --num-prompts 80
+    $(_default_prompts 80)
 }
 
 blazedit() {
@@ -245,66 +271,20 @@ blazedit() {
     --endpoint /v1/chat/completions \
     --dataset-name hf \
     --dataset-path vdaita/edit_5k_char \
-    --request-rate 200 \
-    --num-prompts 50
-}
-
-aimo() {
-  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
-    --backend openai-chat \
-    --model "${MODEL_NAME}" \
-    --endpoint /v1/chat/completions \
-    --dataset-name hf \
-    --dataset-path AI-MO/NuminaMath-CoT \
-    --request-rate 200 \
-    --num-prompts 500
-}
-
-burstgpt() {
-  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
-    --backend openai-chat \
-    --model "${MODEL_NAME}" \
-    --endpoint /v1/chat/completions \
-    --dataset-name burstgpt \
-    --dataset-path "${BENCH_DIR}/BurstGPT_without_fails_2.csv" \
-    --request-rate 50 \
-    --num-prompts 100
-}
-
-random_32k() {
-  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
-    --backend openai-chat \
-    --model "${MODEL_NAME}" \
-    --endpoint /v1/chat/completions \
-    --dataset-name random \
-    --random-input-len 32768 \
-    --random-output-len 256 \
-    --num-prompts 100
-}
-
-random_128k() {
-  _vllm_bench $(_common_args "${FUNCNAME[0]}") \
-    --backend openai-chat \
-    --model "${MODEL_NAME}" \
-    --endpoint /v1/chat/completions \
-    --dataset-name random \
-    --random-input-len 131072 \
-    --random-output-len 256 \
-    --num-prompts 100
+    $(_default_prompts 50)
 }
 
 # ============================================================
 #  사용 가능한 벤치마크 목록 (여기에 추가하면 자동 반영)
 # ============================================================
 ALL_BENCHMARKS=(
-  sharegpt
-  prefix_repetition
-  instructor_coder
-  mt_bench
-  blazedit
-  aimo
-  burstgpt
+  apps_coding
+  vision_single
+  random_1k
+  random_10k
+  random_100k
 )
+
 
 # ============================================================
 #  메인 실행
@@ -317,22 +297,23 @@ Usage: $0 [벤치마크이름 ...]
   vllm bench serve를 네이티브로 실행합니다 (Docker 불필요).
 
   .env 설정:
-    VLLM_BASE_URL   원격 서버 URL (필수)
-    VLLM_API_KEY    API 키 (선택)
-    VLLM_TOKENIZER  토크나이저 (선택, 기본값: MODEL_NAME)
+    VLLM_BASE_URL        원격 서버 URL (필수)
+    VLLM_API_KEY         API 키 (선택)
+    VLLM_TOKENIZER       토크나이저 (선택, 기본값: MODEL_NAME)
 
   환경 변수:
-    REQUEST_RATE    초당 요청 수 (선택, 미설정시 각 워크로드 기본값)
-    MAX_CONCURRENCY 최대 동시 요청 수 (기본값: 32)
+    MAX_CONCURRENCY  최대 동시 요청 수 (기본값: 32)
+    REQUEST_RATE     초당 요청 수 (선택, 미설정시 unlimited)
+    NUM_PROMPTS      총 요청 수 (선택, 미설정시 워크로드별 기본값)
 
   사전 준비:
     uv pip install vllm huggingface_hub datasets
 
 Examples:
-  $0 sharegpt                     # 단일 실행
-  $0 sharegpt mt_bench aimo         # 여러 개 연속 실행
-  $0 all                          # 전체 실행
-
+  $0 apps_coding                                        # 단일 실행
+  $0 apps_coding random_1k random_10k                    # 여러 개 연속 실행
+  $0 all                                                # 전체 실행 (OpenRouter 5개)
+  MAX_CONCURRENCY=16 NUM_PROMPTS=50 $0 all               # 설정 오버라이드
 Available benchmarks:
 $(printf '  - %s\n' "${ALL_BENCHMARKS[@]}")
   - all (전체 실행)
