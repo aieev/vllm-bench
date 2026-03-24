@@ -6,3 +6,7 @@ __pycache__/
 
 # 데이터셋 전체 (check_data 함수가 자동 다운로드/변환)
 bench-dataset/*
+
+# 환경 설정 및 로그
+.env
+*.log

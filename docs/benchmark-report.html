@@ -8,21 +8,13 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fff; color: #111827; line-height: 1.5; }
-  .container { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 32px; }
   @media print { body { background: #fff; } .page-break { page-break-before: always; } .container { padding: 0 16px; } }
   .header { border-bottom: 2px solid #111827; padding: 40px 0 20px; }
   .header h1 { font-size: 26px; font-weight: 700; }
   .header .badges { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
   .badge { display: inline-block; padding: 3px 12px; border-radius: 999px; font-size: 12px; font-weight: 500; }
   .header .meta { color: #9ca3af; font-size: 13px; margin-top: 8px; }
-  .model-legend { display: flex; gap: 20px; margin: 20px 0 8px; font-size: 13px; align-items: center; flex-wrap: wrap; }
-  .model-legend .swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; margin-right: 6px; vertical-align: middle; }
-  .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #e5e7eb; border: 1px solid #e5e7eb; border-radius: 10px; overflow: hidden; margin: 12px 0 24px; }
-  .mc { background: #fff; padding: 18px; text-align: center; }
-  .mc .label { font-size: 10px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.5px; }
-  .mc .val { font-size: 26px; font-weight: 700; margin: 2px 0; }
-  .mc .val .u { font-size: 13px; font-weight: 400; color: #9ca3af; }
-  .mc .sub { font-size: 10px; color: #6b7280; }
   .section { padding: 28px 0 12px; }
   .section h2 { font-size: 19px; font-weight: 700; margin-bottom: 2px; }
   .section .sd { font-size: 13px; color: #9ca3af; margin-bottom: 18px; }
@@ -30,13 +22,12 @@
   .card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 20px; margin-bottom: 14px; }
   .card h3 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
   .card .cd { font-size: 11px; color: #9ca3af; margin-bottom: 12px; }
-  .cb { position: relative; height: 280px; }
+  .cb { position: relative; height: 300px; }
   table.dt { width: 100%; border-collapse: collapse; font-size: 11px; }
   .dt th { text-align: left; padding: 7px 6px; border-bottom: 2px solid #e5e7eb; color: #9ca3af; font-weight: 500; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px; }
   .dt td { padding: 6px 6px; border-bottom: 1px solid #f3f4f6; }
   .dt .r { text-align: right; font-variant-numeric: tabular-nums; }
   .dt .b { font-weight: 600; }
-  .dt .m { color: #d1d5db; }
   .tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 9px; font-weight: 600; }
   .fn { font-size: 10px; color: #d1d5db; margin-top: 8px; }
   footer { border-top: 1px solid #e5e7eb; padding: 16px 0; margin-top: 20px; text-align: center; font-size: 11px; color: #d1d5db; }
@@ -48,166 +39,274 @@
 <div class="header">
   <h1>AIEEV — Provider Performance Report</h1>
   <div class="badges">
-    <span class="badge" style="background:#eef2ff;color:#6366f1;border:1px solid #6366f130">Qwen3.5-9B</span>
-    <span class="badge" style="background:#faf5ff;color:#9333ea;border:1px solid #9333ea30">Qwen3.5-35B-A3B</span>
-    <span class="badge" style="background:#fff7ed;color:#ea580c;border:1px solid #ea580c30">Ministral-3B</span>
-    <span class="badge" style="background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0">FP8</span>
-    <span class="badge" style="background:#f9fafb;color:#6b7280;border:1px solid #e5e7eb">vLLM 0.18.1</span>
+    <span class="badge" style="background:#eef2ff;color:#6366f1;border:1px solid #6366f130">qwen3.5-35b-a3b</span>
+    <span class="badge" style="background:#faf5ff;color:#9333ea;border:1px solid #9333ea30">qwen3.5-9b</span>
   </div>
   <div class="meta">Provider Benchmark Report · 2026-03-24</div>
 </div>
 
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e5e7eb;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin:24px 0">
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#e5e7eb;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin:24px 0">
   <div style="background:#fff;padding:18px;text-align:center">
-    <div style="font-size:13px;font-weight:600;color:#6366f1;margin-bottom:2px">Qwen3.5-9B</div>
-    <div style="font-size:9px;color:#9ca3af;margin-bottom:6px">Dense</div>
-    <div style="font-size:28px;font-weight:700">38.1 <span style="font-size:13px;font-weight:400;color:#9ca3af">tok/s</span></div>
-    <div style="font-size:11px;color:#6b7280;margin-top:2px">Best output speed · Coding</div>
-    <div style="margin-top:10px;font-size:14px;font-weight:600">158<span style="font-size:11px;font-weight:400;color:#9ca3af">ms</span></div>
+    <div style="font-size:13px;font-weight:600;color:#6366f1;margin-bottom:2px">qwen3.5-35b-a3b</div>
+    <div style="font-size:28px;font-weight:700">85.2 <span style="font-size:13px;font-weight:400;color:#9ca3af">tok/s</span></div>
+    <div style="font-size:11px;color:#6b7280;margin-top:2px">Best output speed · Short context (1K)</div>
+    <div style="margin-top:10px;font-size:14px;font-weight:600">118<span style="font-size:11px;font-weight:400;color:#9ca3af">ms</span></div>
     <div style="font-size:10px;color:#9ca3af">Best TTFT</div>
   </div>
   <div style="background:#fff;padding:18px;text-align:center">
-    <div style="font-size:13px;font-weight:600;color:#a855f7;margin-bottom:2px">Qwen3.5-35B-A3B</div>
-    <div style="font-size:9px;color:#9ca3af;margin-bottom:6px">MoE · A3B active</div>
-    <div style="font-size:28px;font-weight:700">111.1 <span style="font-size:13px;font-weight:400;color:#9ca3af">tok/s</span></div>
-    <div style="font-size:11px;color:#6b7280;margin-top:2px">Best output speed · Single Image</div>
-    <div style="margin-top:10px;font-size:14px;font-weight:600">116<span style="font-size:11px;font-weight:400;color:#9ca3af">ms</span></div>
-    <div style="font-size:10px;color:#9ca3af">Best TTFT</div>
-  </div>
-  <div style="background:#fff;padding:18px;text-align:center">
-    <div style="font-size:13px;font-weight:600;color:#ea580c;margin-bottom:2px">Ministral-3B</div>
-    <div style="font-size:9px;color:#9ca3af;margin-bottom:6px">Dense</div>
-    <div style="font-size:28px;font-weight:700">116.1 <span style="font-size:13px;font-weight:400;color:#9ca3af">tok/s</span></div>
-    <div style="font-size:11px;color:#6b7280;margin-top:2px">Best output speed · Coding</div>
-    <div style="margin-top:10px;font-size:14px;font-weight:600">154<span style="font-size:11px;font-weight:400;color:#9ca3af">ms</span></div>
+    <div style="font-size:13px;font-weight:600;color:#a855f7;margin-bottom:2px">qwen3.5-9b</div>
+    <div style="font-size:28px;font-weight:700">64.0 <span style="font-size:13px;font-weight:400;color:#9ca3af">tok/s</span></div>
+    <div style="font-size:11px;color:#6b7280;margin-top:2px">Best output speed · Short context (1K)</div>
+    <div style="margin-top:10px;font-size:14px;font-weight:600">104<span style="font-size:11px;font-weight:400;color:#9ca3af">ms</span></div>
     <div style="font-size:10px;color:#9ca3af">Best TTFT</div>
   </div>
 </div>
 
-<!-- PAGE 2: Throughput -->
+<!-- Section 1: Output Speed -->
 <div class="page-break"></div>
 <div class="section">
   <h2>1. Output Speed</h2>
-  <div class="sd">How fast is each request? · Tokens per second by context length · Higher is better</div>
+  <div class="sd">How fast is each request? · Tokens per second · Higher is better</div>
   <hr class="divider">
 </div>
 
 <div class="card">
-  <h3>Output Speed by Input Token Count (Context Length)</h3>
+  <h3>Output Speed by Workload</h3>
   <div class="cd">Tokens per second · Higher is better</div>
-  <div class="cb">
-    <canvas id="speedChart"></canvas>
-  </div>
+  <div class="cb"><canvas id="speedChart"></canvas></div>
 </div>
 
 <div class="card">
   <table class="dt">
-    <thead><tr><th>Model</th><th>Workload</th><th class="r b">Output Speed (tok/s)</th><th class="r">TTFT Median (Time to First Token)</th></tr></thead>
+    <thead><tr><th>Model</th><th>Workload</th><th class="r">Replica</th><th class="r">Load</th><th class="r b">Output Speed</th><th class="r">TTFT Median</th></tr></thead>
     <tbody>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Coding</td><td class="r b">38.1 tok/s</td><td class="r">158ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Single Image</td><td class="r b">—</td><td class="r">—</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Short context (1K)</td><td class="r b">32.8 tok/s</td><td class="r">1125ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Medium context (10K)</td><td class="r b">16.8 tok/s</td><td class="r">3399ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Long context (100K)</td><td class="r b">1.3 tok/s</td><td class="r">177189ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Coding</td><td class="r b">88.0 tok/s</td><td class="r">116ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Single Image</td><td class="r b">111.1 tok/s</td><td class="r">—</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Short context (1K)</td><td class="r b">50.1 tok/s</td><td class="r">1446ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Medium context (10K)</td><td class="r b">37.6 tok/s</td><td class="r">3473ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Long context (100K)</td><td class="r b">3.2 tok/s</td><td class="r">65321ms</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Coding</td><td class="r b">116.1 tok/s</td><td class="r">154ms</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Single Image</td><td class="r b">—</td><td class="r">—</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Short context (1K)</td><td class="r b">100.3 tok/s</td><td class="r">581ms</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Medium context (10K)</td><td class="r b">19.6 tok/s</td><td class="r">5676ms</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Long context (100K)</td><td class="r b">—</td><td class="r">—</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=128</td><td class="r b">37.1 tok/s</td><td class="r">192ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=128</td><td class="r b">36.9 tok/s</td><td class="r">1068ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=128</td><td class="r b">11.7 tok/s</td><td class="r">7337ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=128</td><td class="r b">1.5 tok/s</td><td class="r">90782ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=16</td><td class="r b">82.2 tok/s</td><td class="r">118ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=16</td><td class="r b">85.2 tok/s</td><td class="r">182ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=16</td><td class="r b">53.3 tok/s</td><td class="r">1946ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=16</td><td class="r b">7.2 tok/s</td><td class="r">28880ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=256</td><td class="r b">22.5 tok/s</td><td class="r">2722ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=256</td><td class="r b">26.2 tok/s</td><td class="r">2052ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=256</td><td class="r b">6.7 tok/s</td><td class="r">12584ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=256</td><td class="r b">1.5 tok/s</td><td class="r">87604ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=32</td><td class="r b">67.1 tok/s</td><td class="r">126ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=32</td><td class="r b">67.3 tok/s</td><td class="r">226ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=32</td><td class="r b">32.1 tok/s</td><td class="r">4418ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=32</td><td class="r b">3.0 tok/s</td><td class="r">52011ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=64</td><td class="r b">51.1 tok/s</td><td class="r">135ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=64</td><td class="r b">50.1 tok/s</td><td class="r">839ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=64</td><td class="r b">20.8 tok/s</td><td class="r">4988ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=64</td><td class="r b">1.5 tok/s</td><td class="r">100008ms</td></tr>
+      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r b">50.6 tok/s</td><td class="r">121ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">46.6 tok/s</td><td class="r">760ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">15.3 tok/s</td><td class="r">2589ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r b">56.8 tok/s</td><td class="r">127ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">57.0 tok/s</td><td class="r">559ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">24.6 tok/s</td><td class="r">1845ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">2.0 tok/s</td><td class="r">88399ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">1.3 tok/s</td><td class="r">177241ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=16</td><td class="r b">56.0 tok/s</td><td class="r">123ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=16</td><td class="r b">60.8 tok/s</td><td class="r">162ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=16</td><td class="r b">38.9 tok/s</td><td class="r">1050ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=16</td><td class="r b">6.7 tok/s</td><td class="r">21347ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">3</td><td class="r">C=16</td><td class="r b">62.4 tok/s</td><td class="r">104ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=16</td><td class="r b">64.0 tok/s</td><td class="r">150ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=16</td><td class="r b">39.3 tok/s</td><td class="r">1298ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=16</td><td class="r b">5.9 tok/s</td><td class="r">18867ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=32</td><td class="r b">58.8 tok/s</td><td class="r">127ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=32</td><td class="r b">57.5 tok/s</td><td class="r">175ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=32</td><td class="r b">30.0 tok/s</td><td class="r">1300ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=32</td><td class="r b">3.6 tok/s</td><td class="r">32518ms</td></tr>
     </tbody>
   </table>
 </div>
 
-<!-- PAGE 3: Latency -->
+<!-- Section 2: Latency -->
 <div class="page-break"></div>
 <div class="section">
   <h2>2. Latency</h2>
-  <div class="sd">How quickly does the response start? · Time to First Token by context length · Lower is better</div>
+  <div class="sd">How quickly does the response start? · Time to First Token · Lower is better</div>
   <hr class="divider">
 </div>
 
 <div class="card">
-  <h3>Latency by Input Token Count (Context Length)</h3>
+  <h3>Latency by Workload</h3>
   <div class="cd">Time to First Token · Seconds · Lower is better</div>
-  <div class="cb">
-    <canvas id="ttftChart"></canvas>
-  </div>
+  <div class="cb"><canvas id="ttftChart"></canvas></div>
 </div>
 
 <div class="card">
   <table class="dt">
-    <thead><tr><th>Model</th><th>Workload</th><th class="r">TTFT Mean</th><th class="r b">TTFT Median</th><th class="r">TTFT P99</th></tr></thead>
+    <thead><tr><th>Model</th><th>Workload</th><th class="r">Replica</th><th class="r">Load</th><th class="r">TTFT Mean</th><th class="r b">TTFT Median</th><th class="r">TTFT P99</th></tr></thead>
     <tbody>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Coding</td><td class="r">12360ms</td><td class="r b">158ms</td><td class="r">38432ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Single Image</td><td class="r">—ms</td><td class="r b">—ms</td><td class="r">—ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Short context (1K)</td><td class="r">58219ms</td><td class="r b">1125ms</td><td class="r">180577ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Medium context (10K)</td><td class="r">4248ms</td><td class="r b">3399ms</td><td class="r">12336ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Long context (100K)</td><td class="r">160769ms</td><td class="r b">177189ms</td><td class="r">228737ms</td></tr>
-      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Coding</td><td class="r">140ms</td><td class="r b">116ms</td><td class="r">244ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Single Image</td><td class="r">552ms</td><td class="r b">—ms</td><td class="r">1910ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Short context (1K)</td><td class="r">11706ms</td><td class="r b">1446ms</td><td class="r">34725ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Medium context (10K)</td><td class="r">3302ms</td><td class="r b">3473ms</td><td class="r">4530ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Long context (100K)</td><td class="r">64308ms</td><td class="r b">65321ms</td><td class="r">127213ms</td></tr>
-      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Coding</td><td class="r">200ms</td><td class="r b">154ms</td><td class="r">380ms</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Single Image</td><td class="r">—ms</td><td class="r b">—ms</td><td class="r">—ms</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Short context (1K)</td><td class="r">514ms</td><td class="r b">581ms</td><td class="r">751ms</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Medium context (10K)</td><td class="r">5528ms</td><td class="r b">5676ms</td><td class="r">10496ms</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Long context (100K)</td><td class="r">—ms</td><td class="r b">—ms</td><td class="r">—ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=128</td><td class="r">355ms</td><td class="r b">192ms</td><td class="r">1014ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">1183ms</td><td class="r b">1068ms</td><td class="r">6869ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">8158ms</td><td class="r b">7337ms</td><td class="r">20547ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">92951ms</td><td class="r b">90782ms</td><td class="r">195374ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=16</td><td class="r">1242ms</td><td class="r b">118ms</td><td class="r">34645ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">235ms</td><td class="r b">182ms</td><td class="r">922ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">1931ms</td><td class="r b">1946ms</td><td class="r">4016ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">37053ms</td><td class="r b">28880ms</td><td class="r">100680ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=256</td><td class="r">2530ms</td><td class="r b">2722ms</td><td class="r">6580ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">3553ms</td><td class="r b">2052ms</td><td class="r">10901ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">16747ms</td><td class="r b">12584ms</td><td class="r">43542ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">91253ms</td><td class="r b">87604ms</td><td class="r">188695ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=32</td><td class="r">145ms</td><td class="r b">126ms</td><td class="r">411ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">261ms</td><td class="r b">226ms</td><td class="r">579ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">4379ms</td><td class="r b">4418ms</td><td class="r">8544ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">55337ms</td><td class="r b">52011ms</td><td class="r">130475ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=64</td><td class="r">186ms</td><td class="r b">135ms</td><td class="r">541ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">735ms</td><td class="r b">839ms</td><td class="r">1226ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">5012ms</td><td class="r b">4988ms</td><td class="r">9407ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">95793ms</td><td class="r b">100008ms</td><td class="r">168322ms</td></tr>
+      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">1347ms</td><td class="r b">121ms</td><td class="r">38475ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">785ms</td><td class="r b">760ms</td><td class="r">1707ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">2562ms</td><td class="r b">2589ms</td><td class="r">8955ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">1680ms</td><td class="r b">127ms</td><td class="r">48053ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">536ms</td><td class="r b">559ms</td><td class="r">804ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">2541ms</td><td class="r b">1845ms</td><td class="r">7512ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">84679ms</td><td class="r b">88399ms</td><td class="r">139349ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">160731ms</td><td class="r b">177241ms</td><td class="r">228542ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=16</td><td class="r">2893ms</td><td class="r b">123ms</td><td class="r">58494ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">176ms</td><td class="r b">162ms</td><td class="r">339ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">1216ms</td><td class="r b">1050ms</td><td class="r">2563ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">24939ms</td><td class="r b">21347ms</td><td class="r">63915ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">3</td><td class="r">C=16</td><td class="r">1452ms</td><td class="r b">104ms</td><td class="r">43762ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">167ms</td><td class="r b">150ms</td><td class="r">376ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">1528ms</td><td class="r b">1298ms</td><td class="r">3813ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">23697ms</td><td class="r b">18867ms</td><td class="r">55289ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=32</td><td class="r">155ms</td><td class="r b">127ms</td><td class="r">457ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">203ms</td><td class="r b">175ms</td><td class="r">638ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">1707ms</td><td class="r b">1300ms</td><td class="r">5262ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">44255ms</td><td class="r b">32518ms</td><td class="r">109762ms</td></tr>
     </tbody>
   </table>
 </div>
 
-<!-- PAGE 4: Capacity -->
+<!-- Section 3: Capacity -->
 <div class="page-break"></div>
 <div class="section">
   <h2>3. Capacity</h2>
-  <div class="sd">How much load can the server handle? · Total tokens processed across all concurrent requests · Higher is better</div>
+  <div class="sd">Total tokens processed across all concurrent requests · Higher is better</div>
   <hr class="divider">
 </div>
 
 <div class="card">
   <h3>Total Throughput Under Concurrent Load</h3>
   <div class="cd">Total tokens/sec across all concurrent requests</div>
-  <div class="cb">
-    <canvas id="aggChart"></canvas>
-  </div>
+  <div class="cb"><canvas id="aggChart"></canvas></div>
 </div>
 
 <div class="card">
   <table class="dt">
-    <thead><tr><th>Model</th><th>Workload</th><th class="r b">Server Throughput (total tok/s)</th><th class="r">Per-Request (tok/s)</th></tr></thead>
+    <thead><tr><th>Model</th><th>Workload</th><th class="r">Replica</th><th class="r">Load</th><th class="r">Server Throughput</th><th class="r b">Per-Request TPS</th></tr></thead>
     <tbody>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Coding</td><td class="r">206.5 tok/s</td><td class="r b">38.1 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Single Image</td><td class="r">—</td><td class="r b">—</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Short context (1K)</td><td class="r">64.0 tok/s</td><td class="r b">32.8 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Medium context (10K)</td><td class="r">228.4 tok/s</td><td class="r b">16.8 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">Qwen3.5-9B</span></td><td>Long context (100K)</td><td class="r">17.1 tok/s</td><td class="r b">1.3 tok/s</td></tr>
-      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Coding</td><td class="r">1009.2 tok/s</td><td class="r b">88.0 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Single Image</td><td class="r">295.0 tok/s</td><td class="r b">111.1 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Short context (1K)</td><td class="r">270.4 tok/s</td><td class="r b">50.1 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Medium context (10K)</td><td class="r">522.0 tok/s</td><td class="r b">37.6 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">Qwen3.5-35B-A3B</span></td><td>Long context (100K)</td><td class="r">35.7 tok/s</td><td class="r b">3.2 tok/s</td></tr>
-      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Coding</td><td class="r">1187.5 tok/s</td><td class="r b">116.1 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Single Image</td><td class="r">—</td><td class="r b">—</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Short context (1K)</td><td class="r">1346.8 tok/s</td><td class="r b">100.3 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Medium context (10K)</td><td class="r">267.0 tok/s</td><td class="r b">19.6 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">Ministral-3B</span></td><td>Long context (100K)</td><td class="r">—</td><td class="r b">—</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=128</td><td class="r">3904.1 tok/s</td><td class="r b">37.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">3985.8 tok/s</td><td class="r b">36.9 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">1398.8 tok/s</td><td class="r b">11.7 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">62.6 tok/s</td><td class="r b">1.5 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=16</td><td class="r">983.2 tok/s</td><td class="r b">82.2 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">1317.2 tok/s</td><td class="r b">85.2 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">723.2 tok/s</td><td class="r b">53.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">58.0 tok/s</td><td class="r b">7.2 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=256</td><td class="r">4329.3 tok/s</td><td class="r b">22.5 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">5134.6 tok/s</td><td class="r b">26.2 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">1426.4 tok/s</td><td class="r b">6.7 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">59.5 tok/s</td><td class="r b">1.5 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=32</td><td class="r">2033.7 tok/s</td><td class="r b">67.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">2048.8 tok/s</td><td class="r b">67.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">759.8 tok/s</td><td class="r b">32.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">63.2 tok/s</td><td class="r b">3.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=64</td><td class="r">2930.2 tok/s</td><td class="r b">51.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">2816.6 tok/s</td><td class="r b">50.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">1212.5 tok/s</td><td class="r b">20.8 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">49.7 tok/s</td><td class="r b">1.5 tok/s</td></tr>
+      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">650.2 tok/s</td><td class="r b">50.6 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">731.0 tok/s</td><td class="r b">46.6 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">241.4 tok/s</td><td class="r b">15.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">672.6 tok/s</td><td class="r b">56.8 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">892.8 tok/s</td><td class="r b">57.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">336.8 tok/s</td><td class="r b">24.6 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">28.1 tok/s</td><td class="r b">2.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">17.1 tok/s</td><td class="r b">1.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=16</td><td class="r">552.0 tok/s</td><td class="r b">56.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">953.8 tok/s</td><td class="r b">60.8 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">596.8 tok/s</td><td class="r b">38.9 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">75.8 tok/s</td><td class="r b">6.7 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">3</td><td class="r">C=16</td><td class="r">746.2 tok/s</td><td class="r b">62.4 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">1001.4 tok/s</td><td class="r b">64.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">577.8 tok/s</td><td class="r b">39.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">75.2 tok/s</td><td class="r b">5.9 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=32</td><td class="r">1664.2 tok/s</td><td class="r b">58.8 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">1792.5 tok/s</td><td class="r b">57.5 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">884.4 tok/s</td><td class="r b">30.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">76.6 tok/s</td><td class="r b">3.6 tok/s</td></tr>
     </tbody>
   </table>
   <div class="fn" style="margin-top:12px; font-size:11px; color:#9ca3af; line-height:1.6">
-    <b>Test methodology:</b> All benchmarks run with <b>vllm bench serve</b> (vLLM 0.18.1) against a live endpoint.<br>
-    500 requests per workload · Max concurrency: 16 · Request rate: unlimited (all sent immediately, capped by concurrency).<br>
-    Throughput = output_tokens / generation_time per request. Total Throughput = total output tokens / total benchmark duration.<br>
-    <b>Workload mapping:</b> Coding = zed-industries/zeta (apps_coding) · Single Image = 1MP image + 1K text tokens (vision_single) · Short context (1K) = Random 1K tokens (random_1k) · Medium context (10K) = Random 10K tokens (random_10k) · Long context (100K) = Random 100K tokens (random_100k)
+    <b>Test methodology:</b> All benchmarks run with <b>vllm bench serve</b> against a live endpoint.<br>
+    Throughput = output_tokens / generation_time per request. Server Throughput = total output tokens / total benchmark duration.<br>
+    <b>Workload mapping:</b> Coding = zed-industries/zeta (apps_coding) · Short context (1K) = Random 1K tokens (random_1k) · Medium context (10K) = Random 10K tokens (random_10k) · Long context (100K) = Random 100K tokens (random_100k)
   </div>
 </div>
 
-<footer>AIEEV Provider Benchmark · Qwen3.5-9B + Qwen3.5-35B-A3B + Ministral-3B · 2026-03-24</footer>
+
+<div class="page-break"></div>
+<div class="section">
+  <h2>4. Saturation Analysis</h2>
+  <div class="sd">How does performance change as concurrency increases? · Find the sweet spot before latency degrades</div>
+  <hr class="divider">
+</div>
+
+<div class="card">
+  <h3>qwen3.5-35b-a3b (replica 2) — Per-Request TPS vs Concurrency</h3>
+  <div class="cd">Higher is better · Each line = one workload</div>
+  <div class="cb"><canvas id="satTps_0"></canvas></div>
+</div>
+<div class="card">
+  <h3>qwen3.5-35b-a3b (replica 2) — TTFT vs Concurrency</h3>
+  <div class="cd">Lower is better · Each line = one workload</div>
+  <div class="cb"><canvas id="satTtft_0"></canvas></div>
+</div>
+
+<div class="card">
+  <h3>qwen3.5-9b (replica 6) — Per-Request TPS vs Concurrency</h3>
+  <div class="cd">Higher is better · Each line = one workload</div>
+  <div class="cb"><canvas id="satTps_1"></canvas></div>
+</div>
+<div class="card">
+  <h3>qwen3.5-9b (replica 6) — TTFT vs Concurrency</h3>
+  <div class="cd">Lower is better · Each line = one workload</div>
+  <div class="cb"><canvas id="satTtft_1"></canvas></div>
+</div>
+
+
+
+
+<div class="page-break"></div>
+<div class="section">
+  <h2>5. Replica Scaling</h2>
+  <div class="sd">How does performance scale with more replicas? · Same model, same concurrency, different replica counts</div>
+  <hr class="divider">
+</div>
+
+<div class="card">
+  <h3>qwen3.5-9b — Per-Request TPS vs Replica Count</h3>
+  <div class="cd">Higher is better · Each line = one workload + concurrency combo</div>
+  <div class="cb"><canvas id="repTps_0"></canvas></div>
+</div>
+<div class="card">
+  <h3>qwen3.5-9b — TTFT vs Replica Count</h3>
+  <div class="cd">Lower is better · Each line = one workload + concurrency combo</div>
+  <div class="cb"><canvas id="repTtft_0"></canvas></div>
+</div>
+
+
+
+<footer>AIEEV Provider Benchmark · qwen3.5-35b-a3b · qwen3.5-9b · 2026-03-24</footer>
 
 </div>
 
@@ -217,12 +316,10 @@ const noGrid = { display: false };
 const noBorder = { display: false };
 const lightGrid = { color: '#f3f4f6' };
 
-// Highlight plugin: click legend to highlight, click again to reset
 const highlightPlugin = {
   id: 'legendHighlight',
   beforeInit(chart) { chart._highlightIndex = -1; },
   afterInit(chart) {
-    const origClick = chart.options.plugins.legend.onClick;
     chart.options.plugins.legend.onClick = function(e, item, legend) {
       const ci = item.datasetIndex;
       const chart = legend.chart;
@@ -244,16 +341,11 @@ Chart.register(highlightPlugin);
 
 new Chart(document.getElementById('speedChart'), {
   type: 'bar',
-  data: {
-    labels: ["Qwen3.5-9B", "Qwen3.5-35B-A3B", "Ministral-3B"],
-    datasets: [
-      { label: 'Coding', data: [38.1, 88.0, 116.1], backgroundColor: '#6366f1', borderRadius: 4 },
-      { label: 'Single Image', data: [null, 111.1, null], backgroundColor: '#a855f7', borderRadius: 4 },
-      { label: 'Short context (1K)', data: [32.8, 50.1, 100.3], backgroundColor: '#22c55e', borderRadius: 4 },
-      { label: 'Medium context (10K)', data: [16.8, 37.6, 19.6], backgroundColor: '#f59e0b', borderRadius: 4 },
-      { label: 'Long context (100K)', data: [1.3, 3.2, null], backgroundColor: '#64748b', borderRadius: 4 },
-    ]
-  },
+  data: { labels: ["qwen3.5-35b-a3b", "qwen3.5-9b"], datasets: [      { label: 'Coding', data: [37.1, 50.6], backgroundColor: '#6366f1', borderRadius: 4 },
+      { label: 'Short context (1K)', data: [36.9, 46.6], backgroundColor: '#a855f7', borderRadius: 4 },
+      { label: 'Medium context (10K)', data: [11.7, 15.3], backgroundColor: '#22c55e', borderRadius: 4 },
+      { label: 'Long context (100K)', data: [1.5, 2.0], backgroundColor: '#f59e0b', borderRadius: 4 },
+] },
   options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true, pointStyle: 'rectRounded' } },
     tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.raw + ' tok/s' } } },
     scales: { y: { title: { display: true, text: 'Output speed (tokens / second)', font: { size: 11 } }, grid: lightGrid, border: noBorder }, x: { grid: noGrid, border: noBorder } } }
@@ -261,16 +353,11 @@ new Chart(document.getElementById('speedChart'), {
 
 new Chart(document.getElementById('ttftChart'), {
   type: 'bar',
-  data: {
-    labels: ["Qwen3.5-9B", "Qwen3.5-35B-A3B", "Ministral-3B"],
-    datasets: [
-      { label: 'Coding', data: [0.15827000000000002, 0.11576, 0.15353999999999998], backgroundColor: '#6366f1', borderRadius: 4 },
-      { label: 'Single Image', data: [null, null, null], backgroundColor: '#a855f7', borderRadius: 4 },
-      { label: 'Short context (1K)', data: [1.12471, 1.44631, 0.58085], backgroundColor: '#22c55e', borderRadius: 4 },
-      { label: 'Medium context (10K)', data: [3.39896, 3.47303, 5.675739999999999], backgroundColor: '#f59e0b', borderRadius: 4 },
-      { label: 'Long context (100K)', data: [177.18869, 65.32115, null], backgroundColor: '#64748b', borderRadius: 4 },
-    ]
-  },
+  data: { labels: ["qwen3.5-35b-a3b", "qwen3.5-9b"], datasets: [      { label: 'Coding', data: [0.19224000000000002, 0.12062], backgroundColor: '#6366f1', borderRadius: 4 },
+      { label: 'Short context (1K)', data: [1.0678299999999998, 0.76005], backgroundColor: '#a855f7', borderRadius: 4 },
+      { label: 'Medium context (10K)', data: [7.3372, 2.58935], backgroundColor: '#22c55e', borderRadius: 4 },
+      { label: 'Long context (100K)', data: [90.78217, 88.39924], backgroundColor: '#f59e0b', borderRadius: 4 },
+] },
   options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true, pointStyle: 'rectRounded' } },
     tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.raw + 's' } } },
     scales: { y: { title: { display: true, text: 'Seconds to First Token', font: { size: 11 } }, grid: lightGrid, border: noBorder }, x: { grid: noGrid, border: noBorder } } }
@@ -278,20 +365,87 @@ new Chart(document.getElementById('ttftChart'), {
 
 new Chart(document.getElementById('aggChart'), {
   type: 'bar',
-  data: {
-    labels: ["Qwen3.5-9B", "Qwen3.5-35B-A3B", "Ministral-3B"],
-    datasets: [
-      { label: 'Coding', data: [206.51, 1009.25, 1187.48], backgroundColor: '#6366f1', borderRadius: 4 },
-      { label: 'Single Image', data: [null, 295.02, null], backgroundColor: '#a855f7', borderRadius: 4 },
-      { label: 'Short context (1K)', data: [64.0, 270.38, 1346.84], backgroundColor: '#22c55e', borderRadius: 4 },
-      { label: 'Medium context (10K)', data: [228.37, 521.96, 266.96], backgroundColor: '#f59e0b', borderRadius: 4 },
-      { label: 'Long context (100K)', data: [17.14, 35.66, null], backgroundColor: '#64748b', borderRadius: 4 },
-    ]
-  },
+  data: { labels: ["qwen3.5-35b-a3b", "qwen3.5-9b"], datasets: [      { label: 'Coding', data: [3904.06, 650.17], backgroundColor: '#6366f1', borderRadius: 4 },
+      { label: 'Short context (1K)', data: [3985.77, 730.96], backgroundColor: '#a855f7', borderRadius: 4 },
+      { label: 'Medium context (10K)', data: [1398.8, 241.38], backgroundColor: '#22c55e', borderRadius: 4 },
+      { label: 'Long context (100K)', data: [62.56, 28.08], backgroundColor: '#f59e0b', borderRadius: 4 },
+] },
   options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyle: 'rectRounded' } },
     tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.raw.toFixed(1) + ' tok/s' } } },
     scales: { y: { title: { display: true, text: 'Total throughput (tokens / second)', font: { size: 11 } }, grid: lightGrid, border: noBorder }, x: { grid: noGrid, border: noBorder } } }
 });
+
+
+new Chart(document.getElementById('satTps_0'), {
+  type: 'line',
+  data: { labels: [16, 32, 64, 128, 256], datasets: [      { label: 'Coding', data: [82.2, 67.1, 51.1, 37.1, 22.5], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K)', data: [85.2, 67.3, 50.1, 36.9, 26.2], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K)', data: [53.3, 32.1, 20.8, 11.7, 6.7], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K)', data: [7.2, 3.0, 1.5, 1.5, 1.5], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Per-Request TPS (tok/s)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Max Concurrency', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+new Chart(document.getElementById('satTtft_0'), {
+  type: 'line',
+  data: { labels: [16, 32, 64, 128, 256], datasets: [      { label: 'Coding', data: [117.57, 126.42, 134.78, 192.24, 2721.79], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K)', data: [181.65, 225.77, 838.87, 1067.83, 2051.64], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K)', data: [1946.47, 4418.42, 4987.95, 7337.2, 12584.0], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K)', data: [28879.85, 52011.41, 100007.72, 90782.17, 87604.3], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Median TTFT (ms)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Max Concurrency', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+
+new Chart(document.getElementById('satTps_1'), {
+  type: 'line',
+  data: { labels: [16, 32], datasets: [      { label: 'Coding', data: [56.0, 58.8], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K)', data: [60.8, 57.5], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K)', data: [38.9, 30.0], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K)', data: [6.7, 3.6], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Per-Request TPS (tok/s)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Max Concurrency', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+new Chart(document.getElementById('satTtft_1'), {
+  type: 'line',
+  data: { labels: [16, 32], datasets: [      { label: 'Coding', data: [123.06, 126.91], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K)', data: [162.05, 174.65], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K)', data: [1049.67, 1299.51], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K)', data: [21346.65, 32517.76], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Median TTFT (ms)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Max Concurrency', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+
+
+new Chart(document.getElementById('repTps_0'), {
+  type: 'line',
+  data: { labels: [1, 3, 6], datasets: [      { label: 'Coding (C=16)', data: [56.8, 62.4, 56.0], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K) (C=16)', data: [57.0, 64.0, 60.8], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K) (C=16)', data: [24.6, 39.3, 38.9], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K) (C=16)', data: [1.3, 5.9, 6.7], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Per-Request TPS (tok/s)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Replica Count', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+new Chart(document.getElementById('repTtft_0'), {
+  type: 'line',
+  data: { labels: [1, 3, 6], datasets: [      { label: 'Coding (C=16)', data: [126.97, 104.03, 123.06], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K) (C=16)', data: [559.39, 149.62, 162.05], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K) (C=16)', data: [1844.62, 1297.7, 1049.67], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K) (C=16)', data: [177240.71, 18866.6, 21346.65], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Median TTFT (ms)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Replica Count', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+
 </script>
 </body>
 </html>
