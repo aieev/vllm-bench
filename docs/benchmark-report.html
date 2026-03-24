@@ -39,22 +39,30 @@
 <div class="header">
   <h1>AIEEV — Provider Performance Report</h1>
   <div class="badges">
-    <span class="badge" style="background:#eef2ff;color:#6366f1;border:1px solid #6366f130">qwen3.5-35b-a3b</span>
-    <span class="badge" style="background:#faf5ff;color:#9333ea;border:1px solid #9333ea30">qwen3.5-9b</span>
+    <span class="badge" style="background:#eef2ff;color:#6366f1;border:1px solid #6366f130">qwen3.5-35b-a3b (RTX-6000-PRO)</span>
+    <span class="badge" style="background:#faf5ff;color:#9333ea;border:1px solid #9333ea30">qwen3.5-9b (RTX-4090)</span>
+    <span class="badge" style="background:#fff7ed;color:#ea580c;border:1px solid #ea580c30">qwen3.5-9b (RTX-5090)</span>
   </div>
   <div class="meta">Provider Benchmark Report · 2026-03-24</div>
 </div>
 
-<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#e5e7eb;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin:24px 0">
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e5e7eb;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;margin:24px 0">
   <div style="background:#fff;padding:18px;text-align:center">
-    <div style="font-size:13px;font-weight:600;color:#6366f1;margin-bottom:2px">qwen3.5-35b-a3b</div>
+    <div style="font-size:13px;font-weight:600;color:#6366f1;margin-bottom:2px">qwen3.5-35b-a3b (RTX-6000-PRO)</div>
     <div style="font-size:28px;font-weight:700">85.2 <span style="font-size:13px;font-weight:400;color:#9ca3af">tok/s</span></div>
     <div style="font-size:11px;color:#6b7280;margin-top:2px">Best output speed · Short context (1K)</div>
     <div style="margin-top:10px;font-size:14px;font-weight:600">118<span style="font-size:11px;font-weight:400;color:#9ca3af">ms</span></div>
     <div style="font-size:10px;color:#9ca3af">Best TTFT</div>
   </div>
   <div style="background:#fff;padding:18px;text-align:center">
-    <div style="font-size:13px;font-weight:600;color:#a855f7;margin-bottom:2px">qwen3.5-9b</div>
+    <div style="font-size:13px;font-weight:600;color:#a855f7;margin-bottom:2px">qwen3.5-9b (RTX-4090)</div>
+    <div style="font-size:28px;font-weight:700">60.8 <span style="font-size:13px;font-weight:400;color:#9ca3af">tok/s</span></div>
+    <div style="font-size:11px;color:#6b7280;margin-top:2px">Best output speed · Short context (1K)</div>
+    <div style="margin-top:10px;font-size:14px;font-weight:600">121<span style="font-size:11px;font-weight:400;color:#9ca3af">ms</span></div>
+    <div style="font-size:10px;color:#9ca3af">Best TTFT</div>
+  </div>
+  <div style="background:#fff;padding:18px;text-align:center">
+    <div style="font-size:13px;font-weight:600;color:#ea580c;margin-bottom:2px">qwen3.5-9b (RTX-5090)</div>
     <div style="font-size:28px;font-weight:700">64.0 <span style="font-size:13px;font-weight:400;color:#9ca3af">tok/s</span></div>
     <div style="font-size:11px;color:#6b7280;margin-top:2px">Best output speed · Short context (1K)</div>
     <div style="margin-top:10px;font-size:14px;font-weight:600">104<span style="font-size:11px;font-weight:400;color:#9ca3af">ms</span></div>
@@ -80,46 +88,50 @@
   <table class="dt">
     <thead><tr><th>Model</th><th>Workload</th><th class="r">Replica</th><th class="r">Load</th><th class="r b">Output Speed</th><th class="r">TTFT Median</th></tr></thead>
     <tbody>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=128</td><td class="r b">37.1 tok/s</td><td class="r">192ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=128</td><td class="r b">36.9 tok/s</td><td class="r">1068ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=128</td><td class="r b">11.7 tok/s</td><td class="r">7337ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=128</td><td class="r b">1.5 tok/s</td><td class="r">90782ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=16</td><td class="r b">82.2 tok/s</td><td class="r">118ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=16</td><td class="r b">85.2 tok/s</td><td class="r">182ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=16</td><td class="r b">53.3 tok/s</td><td class="r">1946ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=16</td><td class="r b">7.2 tok/s</td><td class="r">28880ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=256</td><td class="r b">22.5 tok/s</td><td class="r">2722ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=256</td><td class="r b">26.2 tok/s</td><td class="r">2052ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=256</td><td class="r b">6.7 tok/s</td><td class="r">12584ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=256</td><td class="r b">1.5 tok/s</td><td class="r">87604ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=32</td><td class="r b">67.1 tok/s</td><td class="r">126ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=32</td><td class="r b">67.3 tok/s</td><td class="r">226ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=32</td><td class="r b">32.1 tok/s</td><td class="r">4418ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=32</td><td class="r b">3.0 tok/s</td><td class="r">52011ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=64</td><td class="r b">51.1 tok/s</td><td class="r">135ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=64</td><td class="r b">50.1 tok/s</td><td class="r">839ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=64</td><td class="r b">20.8 tok/s</td><td class="r">4988ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=64</td><td class="r b">1.5 tok/s</td><td class="r">100008ms</td></tr>
-      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r b">50.6 tok/s</td><td class="r">121ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">46.6 tok/s</td><td class="r">760ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">15.3 tok/s</td><td class="r">2589ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r b">56.8 tok/s</td><td class="r">127ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">57.0 tok/s</td><td class="r">559ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">24.6 tok/s</td><td class="r">1845ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">2.0 tok/s</td><td class="r">88399ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">1.3 tok/s</td><td class="r">177241ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=16</td><td class="r b">56.0 tok/s</td><td class="r">123ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=16</td><td class="r b">60.8 tok/s</td><td class="r">162ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=16</td><td class="r b">38.9 tok/s</td><td class="r">1050ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=16</td><td class="r b">6.7 tok/s</td><td class="r">21347ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">3</td><td class="r">C=16</td><td class="r b">62.4 tok/s</td><td class="r">104ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=16</td><td class="r b">64.0 tok/s</td><td class="r">150ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=16</td><td class="r b">39.3 tok/s</td><td class="r">1298ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=16</td><td class="r b">5.9 tok/s</td><td class="r">18867ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=32</td><td class="r b">58.8 tok/s</td><td class="r">127ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=32</td><td class="r b">57.5 tok/s</td><td class="r">175ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=32</td><td class="r b">30.0 tok/s</td><td class="r">1300ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=32</td><td class="r b">3.6 tok/s</td><td class="r">32518ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=128</td><td class="r b">37.1 tok/s</td><td class="r">192ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=128</td><td class="r b">36.9 tok/s</td><td class="r">1068ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=128</td><td class="r b">11.7 tok/s</td><td class="r">7337ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=128</td><td class="r b">1.5 tok/s</td><td class="r">90782ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=16</td><td class="r b">82.2 tok/s</td><td class="r">118ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=16</td><td class="r b">85.2 tok/s</td><td class="r">182ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=16</td><td class="r b">53.3 tok/s</td><td class="r">1946ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=16</td><td class="r b">7.2 tok/s</td><td class="r">28880ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=256</td><td class="r b">22.5 tok/s</td><td class="r">2722ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=256</td><td class="r b">26.2 tok/s</td><td class="r">2052ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=256</td><td class="r b">6.7 tok/s</td><td class="r">12584ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=256</td><td class="r b">1.5 tok/s</td><td class="r">87604ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=32</td><td class="r b">67.1 tok/s</td><td class="r">126ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=32</td><td class="r b">67.3 tok/s</td><td class="r">226ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=32</td><td class="r b">32.1 tok/s</td><td class="r">4418ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=32</td><td class="r b">3.0 tok/s</td><td class="r">52011ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=64</td><td class="r b">51.1 tok/s</td><td class="r">135ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=64</td><td class="r b">50.1 tok/s</td><td class="r">839ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=64</td><td class="r b">20.8 tok/s</td><td class="r">4988ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=64</td><td class="r b">1.5 tok/s</td><td class="r">100008ms</td></tr>
+      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r b">50.6 tok/s</td><td class="r">121ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">46.6 tok/s</td><td class="r">760ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">15.3 tok/s</td><td class="r">2589ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">1.3 tok/s</td><td class="r">177241ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Coding</td><td class="r">6</td><td class="r">C=16</td><td class="r b">56.0 tok/s</td><td class="r">123ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=16</td><td class="r b">60.8 tok/s</td><td class="r">162ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=16</td><td class="r b">38.9 tok/s</td><td class="r">1050ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=16</td><td class="r b">6.7 tok/s</td><td class="r">21347ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Coding</td><td class="r">6</td><td class="r">C=32</td><td class="r b">58.8 tok/s</td><td class="r">127ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=32</td><td class="r b">57.5 tok/s</td><td class="r">175ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=32</td><td class="r b">30.0 tok/s</td><td class="r">1300ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=32</td><td class="r b">3.6 tok/s</td><td class="r">32518ms</td></tr>
+      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r b">56.8 tok/s</td><td class="r">127ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">57.0 tok/s</td><td class="r">559ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">24.6 tok/s</td><td class="r">1845ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r b">2.0 tok/s</td><td class="r">88399ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Coding</td><td class="r">3</td><td class="r">C=16</td><td class="r b">62.4 tok/s</td><td class="r">104ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=16</td><td class="r b">64.0 tok/s</td><td class="r">150ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=16</td><td class="r b">39.3 tok/s</td><td class="r">1298ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=16</td><td class="r b">5.9 tok/s</td><td class="r">18867ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Coding</td><td class="r">3</td><td class="r">C=32</td><td class="r b">61.0 tok/s</td><td class="r">311ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=32</td><td class="r b">60.7 tok/s</td><td class="r">352ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=32</td><td class="r b">31.3 tok/s</td><td class="r">1744ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=32</td><td class="r b">3.1 tok/s</td><td class="r">42823ms</td></tr>
     </tbody>
   </table>
 </div>
@@ -142,46 +154,50 @@
   <table class="dt">
     <thead><tr><th>Model</th><th>Workload</th><th class="r">Replica</th><th class="r">Load</th><th class="r">TTFT Mean</th><th class="r b">TTFT Median</th><th class="r">TTFT P99</th></tr></thead>
     <tbody>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=128</td><td class="r">355ms</td><td class="r b">192ms</td><td class="r">1014ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">1183ms</td><td class="r b">1068ms</td><td class="r">6869ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">8158ms</td><td class="r b">7337ms</td><td class="r">20547ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">92951ms</td><td class="r b">90782ms</td><td class="r">195374ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=16</td><td class="r">1242ms</td><td class="r b">118ms</td><td class="r">34645ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">235ms</td><td class="r b">182ms</td><td class="r">922ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">1931ms</td><td class="r b">1946ms</td><td class="r">4016ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">37053ms</td><td class="r b">28880ms</td><td class="r">100680ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=256</td><td class="r">2530ms</td><td class="r b">2722ms</td><td class="r">6580ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">3553ms</td><td class="r b">2052ms</td><td class="r">10901ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">16747ms</td><td class="r b">12584ms</td><td class="r">43542ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">91253ms</td><td class="r b">87604ms</td><td class="r">188695ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=32</td><td class="r">145ms</td><td class="r b">126ms</td><td class="r">411ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">261ms</td><td class="r b">226ms</td><td class="r">579ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">4379ms</td><td class="r b">4418ms</td><td class="r">8544ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">55337ms</td><td class="r b">52011ms</td><td class="r">130475ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=64</td><td class="r">186ms</td><td class="r b">135ms</td><td class="r">541ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">735ms</td><td class="r b">839ms</td><td class="r">1226ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">5012ms</td><td class="r b">4988ms</td><td class="r">9407ms</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">95793ms</td><td class="r b">100008ms</td><td class="r">168322ms</td></tr>
-      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">1347ms</td><td class="r b">121ms</td><td class="r">38475ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">785ms</td><td class="r b">760ms</td><td class="r">1707ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">2562ms</td><td class="r b">2589ms</td><td class="r">8955ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">1680ms</td><td class="r b">127ms</td><td class="r">48053ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">536ms</td><td class="r b">559ms</td><td class="r">804ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">2541ms</td><td class="r b">1845ms</td><td class="r">7512ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">84679ms</td><td class="r b">88399ms</td><td class="r">139349ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">160731ms</td><td class="r b">177241ms</td><td class="r">228542ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=16</td><td class="r">2893ms</td><td class="r b">123ms</td><td class="r">58494ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">176ms</td><td class="r b">162ms</td><td class="r">339ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">1216ms</td><td class="r b">1050ms</td><td class="r">2563ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">24939ms</td><td class="r b">21347ms</td><td class="r">63915ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">3</td><td class="r">C=16</td><td class="r">1452ms</td><td class="r b">104ms</td><td class="r">43762ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">167ms</td><td class="r b">150ms</td><td class="r">376ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">1528ms</td><td class="r b">1298ms</td><td class="r">3813ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">23697ms</td><td class="r b">18867ms</td><td class="r">55289ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=32</td><td class="r">155ms</td><td class="r b">127ms</td><td class="r">457ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">203ms</td><td class="r b">175ms</td><td class="r">638ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">1707ms</td><td class="r b">1300ms</td><td class="r">5262ms</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">44255ms</td><td class="r b">32518ms</td><td class="r">109762ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=128</td><td class="r">355ms</td><td class="r b">192ms</td><td class="r">1014ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">1183ms</td><td class="r b">1068ms</td><td class="r">6869ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">8158ms</td><td class="r b">7337ms</td><td class="r">20547ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">92951ms</td><td class="r b">90782ms</td><td class="r">195374ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=16</td><td class="r">1242ms</td><td class="r b">118ms</td><td class="r">34645ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">235ms</td><td class="r b">182ms</td><td class="r">922ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">1931ms</td><td class="r b">1946ms</td><td class="r">4016ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">37053ms</td><td class="r b">28880ms</td><td class="r">100680ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=256</td><td class="r">2530ms</td><td class="r b">2722ms</td><td class="r">6580ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">3553ms</td><td class="r b">2052ms</td><td class="r">10901ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">16747ms</td><td class="r b">12584ms</td><td class="r">43542ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">91253ms</td><td class="r b">87604ms</td><td class="r">188695ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=32</td><td class="r">145ms</td><td class="r b">126ms</td><td class="r">411ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">261ms</td><td class="r b">226ms</td><td class="r">579ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">4379ms</td><td class="r b">4418ms</td><td class="r">8544ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">55337ms</td><td class="r b">52011ms</td><td class="r">130475ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=64</td><td class="r">186ms</td><td class="r b">135ms</td><td class="r">541ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">735ms</td><td class="r b">839ms</td><td class="r">1226ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">5012ms</td><td class="r b">4988ms</td><td class="r">9407ms</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">95793ms</td><td class="r b">100008ms</td><td class="r">168322ms</td></tr>
+      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">1347ms</td><td class="r b">121ms</td><td class="r">38475ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">785ms</td><td class="r b">760ms</td><td class="r">1707ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">2562ms</td><td class="r b">2589ms</td><td class="r">8955ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">160731ms</td><td class="r b">177241ms</td><td class="r">228542ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Coding</td><td class="r">6</td><td class="r">C=16</td><td class="r">2893ms</td><td class="r b">123ms</td><td class="r">58494ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">176ms</td><td class="r b">162ms</td><td class="r">339ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">1216ms</td><td class="r b">1050ms</td><td class="r">2563ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">24939ms</td><td class="r b">21347ms</td><td class="r">63915ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Coding</td><td class="r">6</td><td class="r">C=32</td><td class="r">155ms</td><td class="r b">127ms</td><td class="r">457ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">203ms</td><td class="r b">175ms</td><td class="r">638ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">1707ms</td><td class="r b">1300ms</td><td class="r">5262ms</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">44255ms</td><td class="r b">32518ms</td><td class="r">109762ms</td></tr>
+      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">1680ms</td><td class="r b">127ms</td><td class="r">48053ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">536ms</td><td class="r b">559ms</td><td class="r">804ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">2541ms</td><td class="r b">1845ms</td><td class="r">7512ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">84679ms</td><td class="r b">88399ms</td><td class="r">139349ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Coding</td><td class="r">3</td><td class="r">C=16</td><td class="r">1452ms</td><td class="r b">104ms</td><td class="r">43762ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">167ms</td><td class="r b">150ms</td><td class="r">376ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">1528ms</td><td class="r b">1298ms</td><td class="r">3813ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">23697ms</td><td class="r b">18867ms</td><td class="r">55289ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Coding</td><td class="r">3</td><td class="r">C=32</td><td class="r">258ms</td><td class="r b">311ms</td><td class="r">385ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=32</td><td class="r">394ms</td><td class="r b">352ms</td><td class="r">817ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=32</td><td class="r">2521ms</td><td class="r b">1744ms</td><td class="r">7020ms</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=32</td><td class="r">47707ms</td><td class="r b">42823ms</td><td class="r">100507ms</td></tr>
     </tbody>
   </table>
 </div>
@@ -204,46 +220,50 @@
   <table class="dt">
     <thead><tr><th>Model</th><th>Workload</th><th class="r">Replica</th><th class="r">Load</th><th class="r">Server Throughput</th><th class="r b">Per-Request TPS</th></tr></thead>
     <tbody>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=128</td><td class="r">3904.1 tok/s</td><td class="r b">37.1 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">3985.8 tok/s</td><td class="r b">36.9 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">1398.8 tok/s</td><td class="r b">11.7 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">62.6 tok/s</td><td class="r b">1.5 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=16</td><td class="r">983.2 tok/s</td><td class="r b">82.2 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">1317.2 tok/s</td><td class="r b">85.2 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">723.2 tok/s</td><td class="r b">53.3 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">58.0 tok/s</td><td class="r b">7.2 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=256</td><td class="r">4329.3 tok/s</td><td class="r b">22.5 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">5134.6 tok/s</td><td class="r b">26.2 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">1426.4 tok/s</td><td class="r b">6.7 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">59.5 tok/s</td><td class="r b">1.5 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=32</td><td class="r">2033.7 tok/s</td><td class="r b">67.1 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">2048.8 tok/s</td><td class="r b">67.3 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">759.8 tok/s</td><td class="r b">32.1 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">63.2 tok/s</td><td class="r b">3.0 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Coding</td><td class="r">2</td><td class="r">C=64</td><td class="r">2930.2 tok/s</td><td class="r b">51.1 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">2816.6 tok/s</td><td class="r b">50.1 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">1212.5 tok/s</td><td class="r b">20.8 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">49.7 tok/s</td><td class="r b">1.5 tok/s</td></tr>
-      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">650.2 tok/s</td><td class="r b">50.6 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">731.0 tok/s</td><td class="r b">46.6 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">241.4 tok/s</td><td class="r b">15.3 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">672.6 tok/s</td><td class="r b">56.8 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">892.8 tok/s</td><td class="r b">57.0 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">336.8 tok/s</td><td class="r b">24.6 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">28.1 tok/s</td><td class="r b">2.0 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">17.1 tok/s</td><td class="r b">1.3 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=16</td><td class="r">552.0 tok/s</td><td class="r b">56.0 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">953.8 tok/s</td><td class="r b">60.8 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">596.8 tok/s</td><td class="r b">38.9 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">75.8 tok/s</td><td class="r b">6.7 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">3</td><td class="r">C=16</td><td class="r">746.2 tok/s</td><td class="r b">62.4 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">1001.4 tok/s</td><td class="r b">64.0 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">577.8 tok/s</td><td class="r b">39.3 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">75.2 tok/s</td><td class="r b">5.9 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Coding</td><td class="r">6</td><td class="r">C=32</td><td class="r">1664.2 tok/s</td><td class="r b">58.8 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">1792.5 tok/s</td><td class="r b">57.5 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">884.4 tok/s</td><td class="r b">30.0 tok/s</td></tr>
-      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">76.6 tok/s</td><td class="r b">3.6 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=128</td><td class="r">3904.1 tok/s</td><td class="r b">37.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">3985.8 tok/s</td><td class="r b">36.9 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">1398.8 tok/s</td><td class="r b">11.7 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=128</td><td class="r">62.6 tok/s</td><td class="r b">1.5 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=16</td><td class="r">983.2 tok/s</td><td class="r b">82.2 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">1317.2 tok/s</td><td class="r b">85.2 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">723.2 tok/s</td><td class="r b">53.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=16</td><td class="r">58.0 tok/s</td><td class="r b">7.2 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=256</td><td class="r">4329.3 tok/s</td><td class="r b">22.5 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">5134.6 tok/s</td><td class="r b">26.2 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">1426.4 tok/s</td><td class="r b">6.7 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=256</td><td class="r">59.5 tok/s</td><td class="r b">1.5 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=32</td><td class="r">2033.7 tok/s</td><td class="r b">67.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">2048.8 tok/s</td><td class="r b">67.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">759.8 tok/s</td><td class="r b">32.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=32</td><td class="r">63.2 tok/s</td><td class="r b">3.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Coding</td><td class="r">2</td><td class="r">C=64</td><td class="r">2930.2 tok/s</td><td class="r b">51.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Short context (1K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">2816.6 tok/s</td><td class="r b">50.1 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Medium context (10K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">1212.5 tok/s</td><td class="r b">20.8 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#eef2ff;color:#6366f1">qwen3.5-35b-a3b (RTX-6000-PRO)</span></td><td>Long context (100K)</td><td class="r">2</td><td class="r">C=64</td><td class="r">49.7 tok/s</td><td class="r b">1.5 tok/s</td></tr>
+      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">650.2 tok/s</td><td class="r b">50.6 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">731.0 tok/s</td><td class="r b">46.6 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">241.4 tok/s</td><td class="r b">15.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">17.1 tok/s</td><td class="r b">1.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Coding</td><td class="r">6</td><td class="r">C=16</td><td class="r">552.0 tok/s</td><td class="r b">56.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">953.8 tok/s</td><td class="r b">60.8 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">596.8 tok/s</td><td class="r b">38.9 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=16</td><td class="r">75.8 tok/s</td><td class="r b">6.7 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Coding</td><td class="r">6</td><td class="r">C=32</td><td class="r">1664.2 tok/s</td><td class="r b">58.8 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Short context (1K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">1792.5 tok/s</td><td class="r b">57.5 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Medium context (10K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">884.4 tok/s</td><td class="r b">30.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#faf5ff;color:#9333ea">qwen3.5-9b (RTX-4090)</span></td><td>Long context (100K)</td><td class="r">6</td><td class="r">C=32</td><td class="r">76.6 tok/s</td><td class="r b">3.6 tok/s</td></tr>
+      <tr style="border-top:2px solid #e5e7eb"><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Coding</td><td class="r">1</td><td class="r">C=16</td><td class="r">672.6 tok/s</td><td class="r b">56.8 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Short context (1K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">892.8 tok/s</td><td class="r b">57.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Medium context (10K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">336.8 tok/s</td><td class="r b">24.6 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Long context (100K)</td><td class="r">1</td><td class="r">C=16</td><td class="r">28.1 tok/s</td><td class="r b">2.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Coding</td><td class="r">3</td><td class="r">C=16</td><td class="r">746.2 tok/s</td><td class="r b">62.4 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">1001.4 tok/s</td><td class="r b">64.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">577.8 tok/s</td><td class="r b">39.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=16</td><td class="r">75.2 tok/s</td><td class="r b">5.9 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Coding</td><td class="r">3</td><td class="r">C=32</td><td class="r">794.9 tok/s</td><td class="r b">61.0 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Short context (1K)</td><td class="r">3</td><td class="r">C=32</td><td class="r">1530.1 tok/s</td><td class="r b">60.7 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Medium context (10K)</td><td class="r">3</td><td class="r">C=32</td><td class="r">768.7 tok/s</td><td class="r b">31.3 tok/s</td></tr>
+      <tr><td><span class="tag" style="background:#fff7ed;color:#ea580c">qwen3.5-9b (RTX-5090)</span></td><td>Long context (100K)</td><td class="r">3</td><td class="r">C=32</td><td class="r">78.6 tok/s</td><td class="r b">3.1 tok/s</td></tr>
     </tbody>
   </table>
   <div class="fn" style="margin-top:12px; font-size:11px; color:#9ca3af; line-height:1.6">
@@ -262,25 +282,36 @@
 </div>
 
 <div class="card">
-  <h3>qwen3.5-35b-a3b (replica 2) — Per-Request TPS vs Concurrency</h3>
+  <h3>qwen3.5-35b-a3b (RTX-6000-PRO) (replica 2) — Per-Request TPS vs Concurrency</h3>
   <div class="cd">Higher is better · Each line = one workload</div>
   <div class="cb"><canvas id="satTps_0"></canvas></div>
 </div>
 <div class="card">
-  <h3>qwen3.5-35b-a3b (replica 2) — TTFT vs Concurrency</h3>
+  <h3>qwen3.5-35b-a3b (RTX-6000-PRO) (replica 2) — TTFT vs Concurrency</h3>
   <div class="cd">Lower is better · Each line = one workload</div>
   <div class="cb"><canvas id="satTtft_0"></canvas></div>
 </div>
 
 <div class="card">
-  <h3>qwen3.5-9b (replica 6) — Per-Request TPS vs Concurrency</h3>
+  <h3>qwen3.5-9b (RTX-4090) (replica 6) — Per-Request TPS vs Concurrency</h3>
   <div class="cd">Higher is better · Each line = one workload</div>
   <div class="cb"><canvas id="satTps_1"></canvas></div>
 </div>
 <div class="card">
-  <h3>qwen3.5-9b (replica 6) — TTFT vs Concurrency</h3>
+  <h3>qwen3.5-9b (RTX-4090) (replica 6) — TTFT vs Concurrency</h3>
   <div class="cd">Lower is better · Each line = one workload</div>
   <div class="cb"><canvas id="satTtft_1"></canvas></div>
+</div>
+
+<div class="card">
+  <h3>qwen3.5-9b (RTX-5090) (replica 3) — Per-Request TPS vs Concurrency</h3>
+  <div class="cd">Higher is better · Each line = one workload</div>
+  <div class="cb"><canvas id="satTps_2"></canvas></div>
+</div>
+<div class="card">
+  <h3>qwen3.5-9b (RTX-5090) (replica 3) — TTFT vs Concurrency</h3>
+  <div class="cd">Lower is better · Each line = one workload</div>
+  <div class="cb"><canvas id="satTtft_2"></canvas></div>
 </div>
 
 
@@ -294,19 +325,30 @@
 </div>
 
 <div class="card">
-  <h3>qwen3.5-9b — Per-Request TPS vs Replica Count</h3>
+  <h3>qwen3.5-9b (RTX-4090) — Per-Request TPS vs Replica Count</h3>
   <div class="cd">Higher is better · Each line = one workload + concurrency combo</div>
   <div class="cb"><canvas id="repTps_0"></canvas></div>
 </div>
 <div class="card">
-  <h3>qwen3.5-9b — TTFT vs Replica Count</h3>
+  <h3>qwen3.5-9b (RTX-4090) — TTFT vs Replica Count</h3>
   <div class="cd">Lower is better · Each line = one workload + concurrency combo</div>
   <div class="cb"><canvas id="repTtft_0"></canvas></div>
 </div>
 
+<div class="card">
+  <h3>qwen3.5-9b (RTX-5090) — Per-Request TPS vs Replica Count</h3>
+  <div class="cd">Higher is better · Each line = one workload + concurrency combo</div>
+  <div class="cb"><canvas id="repTps_1"></canvas></div>
+</div>
+<div class="card">
+  <h3>qwen3.5-9b (RTX-5090) — TTFT vs Replica Count</h3>
+  <div class="cd">Lower is better · Each line = one workload + concurrency combo</div>
+  <div class="cb"><canvas id="repTtft_1"></canvas></div>
+</div>
 
 
-<footer>AIEEV Provider Benchmark · qwen3.5-35b-a3b · qwen3.5-9b · 2026-03-24</footer>
+
+<footer>AIEEV Provider Benchmark · qwen3.5-35b-a3b (RTX-6000-PRO) · qwen3.5-9b (RTX-4090) · qwen3.5-9b (RTX-5090) · 2026-03-24</footer>
 
 </div>
 
@@ -341,10 +383,10 @@ Chart.register(highlightPlugin);
 
 new Chart(document.getElementById('speedChart'), {
   type: 'bar',
-  data: { labels: ["qwen3.5-35b-a3b", "qwen3.5-9b"], datasets: [      { label: 'Coding', data: [37.1, 50.6], backgroundColor: '#6366f1', borderRadius: 4 },
-      { label: 'Short context (1K)', data: [36.9, 46.6], backgroundColor: '#a855f7', borderRadius: 4 },
-      { label: 'Medium context (10K)', data: [11.7, 15.3], backgroundColor: '#22c55e', borderRadius: 4 },
-      { label: 'Long context (100K)', data: [1.5, 2.0], backgroundColor: '#f59e0b', borderRadius: 4 },
+  data: { labels: ["qwen3.5-35b-a3b (RTX-6000-PRO)", "qwen3.5-9b (RTX-4090)", "qwen3.5-9b (RTX-5090)"], datasets: [      { label: 'Coding', data: [37.1, 50.6, 56.8], backgroundColor: '#6366f1', borderRadius: 4 },
+      { label: 'Short context (1K)', data: [36.9, 46.6, 57.0], backgroundColor: '#a855f7', borderRadius: 4 },
+      { label: 'Medium context (10K)', data: [11.7, 15.3, 24.6], backgroundColor: '#22c55e', borderRadius: 4 },
+      { label: 'Long context (100K)', data: [1.5, 1.3, 2.0], backgroundColor: '#f59e0b', borderRadius: 4 },
 ] },
   options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true, pointStyle: 'rectRounded' } },
     tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.raw + ' tok/s' } } },
@@ -353,10 +395,10 @@ new Chart(document.getElementById('speedChart'), {
 
 new Chart(document.getElementById('ttftChart'), {
   type: 'bar',
-  data: { labels: ["qwen3.5-35b-a3b", "qwen3.5-9b"], datasets: [      { label: 'Coding', data: [0.19224000000000002, 0.12062], backgroundColor: '#6366f1', borderRadius: 4 },
-      { label: 'Short context (1K)', data: [1.0678299999999998, 0.76005], backgroundColor: '#a855f7', borderRadius: 4 },
-      { label: 'Medium context (10K)', data: [7.3372, 2.58935], backgroundColor: '#22c55e', borderRadius: 4 },
-      { label: 'Long context (100K)', data: [90.78217, 88.39924], backgroundColor: '#f59e0b', borderRadius: 4 },
+  data: { labels: ["qwen3.5-35b-a3b (RTX-6000-PRO)", "qwen3.5-9b (RTX-4090)", "qwen3.5-9b (RTX-5090)"], datasets: [      { label: 'Coding', data: [0.19224000000000002, 0.12062, 0.12697], backgroundColor: '#6366f1', borderRadius: 4 },
+      { label: 'Short context (1K)', data: [1.0678299999999998, 0.76005, 0.5593899999999999], backgroundColor: '#a855f7', borderRadius: 4 },
+      { label: 'Medium context (10K)', data: [7.3372, 2.58935, 1.84462], backgroundColor: '#22c55e', borderRadius: 4 },
+      { label: 'Long context (100K)', data: [90.78217, 177.24070999999998, 88.39924], backgroundColor: '#f59e0b', borderRadius: 4 },
 ] },
   options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true, pointStyle: 'rectRounded' } },
     tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.raw + 's' } } },
@@ -365,10 +407,10 @@ new Chart(document.getElementById('ttftChart'), {
 
 new Chart(document.getElementById('aggChart'), {
   type: 'bar',
-  data: { labels: ["qwen3.5-35b-a3b", "qwen3.5-9b"], datasets: [      { label: 'Coding', data: [3904.06, 650.17], backgroundColor: '#6366f1', borderRadius: 4 },
-      { label: 'Short context (1K)', data: [3985.77, 730.96], backgroundColor: '#a855f7', borderRadius: 4 },
-      { label: 'Medium context (10K)', data: [1398.8, 241.38], backgroundColor: '#22c55e', borderRadius: 4 },
-      { label: 'Long context (100K)', data: [62.56, 28.08], backgroundColor: '#f59e0b', borderRadius: 4 },
+  data: { labels: ["qwen3.5-35b-a3b (RTX-6000-PRO)", "qwen3.5-9b (RTX-4090)", "qwen3.5-9b (RTX-5090)"], datasets: [      { label: 'Coding', data: [3904.06, 650.17, 672.56], backgroundColor: '#6366f1', borderRadius: 4 },
+      { label: 'Short context (1K)', data: [3985.77, 730.96, 892.8], backgroundColor: '#a855f7', borderRadius: 4 },
+      { label: 'Medium context (10K)', data: [1398.8, 241.38, 336.81], backgroundColor: '#22c55e', borderRadius: 4 },
+      { label: 'Long context (100K)', data: [62.56, 17.14, 28.08], backgroundColor: '#f59e0b', borderRadius: 4 },
 ] },
   options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 11 }, usePointStyle: true, pointStyle: 'rectRounded' } },
     tooltip: { callbacks: { label: c => c.dataset.label + ': ' + c.raw.toFixed(1) + ' tok/s' } } },
@@ -422,13 +464,36 @@ new Chart(document.getElementById('satTtft_1'), {
               x: { title: { display: true, text: 'Max Concurrency', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
 });
 
+new Chart(document.getElementById('satTps_2'), {
+  type: 'line',
+  data: { labels: [16, 32], datasets: [      { label: 'Coding', data: [62.4, 61.0], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K)', data: [64.0, 60.7], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K)', data: [39.3, 31.3], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K)', data: [5.9, 3.1], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Per-Request TPS (tok/s)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Max Concurrency', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+new Chart(document.getElementById('satTtft_2'), {
+  type: 'line',
+  data: { labels: [16, 32], datasets: [      { label: 'Coding', data: [104.03, 311.22], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K)', data: [149.62, 352.0], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K)', data: [1297.7, 1744.48], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K)', data: [18866.6, 42823.17], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Median TTFT (ms)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Max Concurrency', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+
 
 new Chart(document.getElementById('repTps_0'), {
   type: 'line',
-  data: { labels: [1, 3, 6], datasets: [      { label: 'Coding (C=16)', data: [56.8, 62.4, 56.0], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
-      { label: 'Short context (1K) (C=16)', data: [57.0, 64.0, 60.8], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
-      { label: 'Medium context (10K) (C=16)', data: [24.6, 39.3, 38.9], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
-      { label: 'Long context (100K) (C=16)', data: [1.3, 5.9, 6.7], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+  data: { labels: [1, 6], datasets: [      { label: 'Coding (C=16)', data: [50.6, 56.0], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K) (C=16)', data: [46.6, 60.8], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K) (C=16)', data: [15.3, 38.9], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K) (C=16)', data: [1.3, 6.7], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
 ] },
   options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
     scales: { y: { title: { display: true, text: 'Per-Request TPS (tok/s)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
@@ -436,10 +501,33 @@ new Chart(document.getElementById('repTps_0'), {
 });
 new Chart(document.getElementById('repTtft_0'), {
   type: 'line',
-  data: { labels: [1, 3, 6], datasets: [      { label: 'Coding (C=16)', data: [126.97, 104.03, 123.06], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
-      { label: 'Short context (1K) (C=16)', data: [559.39, 149.62, 162.05], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
-      { label: 'Medium context (10K) (C=16)', data: [1844.62, 1297.7, 1049.67], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
-      { label: 'Long context (100K) (C=16)', data: [177240.71, 18866.6, 21346.65], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+  data: { labels: [1, 6], datasets: [      { label: 'Coding (C=16)', data: [120.62, 123.06], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K) (C=16)', data: [760.05, 162.05], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K) (C=16)', data: [2589.35, 1049.67], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K) (C=16)', data: [177240.71, 21346.65], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Median TTFT (ms)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Replica Count', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+
+new Chart(document.getElementById('repTps_1'), {
+  type: 'line',
+  data: { labels: [1, 3], datasets: [      { label: 'Coding (C=16)', data: [56.8, 62.4], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K) (C=16)', data: [57.0, 64.0], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K) (C=16)', data: [24.6, 39.3], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K) (C=16)', data: [2.0, 5.9], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
+] },
+  options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
+    scales: { y: { title: { display: true, text: 'Per-Request TPS (tok/s)', font: { size: 11 } }, grid: lightGrid, border: noBorder },
+              x: { title: { display: true, text: 'Replica Count', font: { size: 11 } }, grid: noGrid, border: noBorder } } }
+});
+new Chart(document.getElementById('repTtft_1'), {
+  type: 'line',
+  data: { labels: [1, 3], datasets: [      { label: 'Coding (C=16)', data: [126.97, 104.03], borderColor: '#6366f1', backgroundColor: '#6366f1', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Short context (1K) (C=16)', data: [559.39, 149.62], borderColor: '#a855f7', backgroundColor: '#a855f7', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Medium context (10K) (C=16)', data: [1844.62, 1297.7], borderColor: '#22c55e', backgroundColor: '#22c55e', tension: 0.3, pointRadius: 4, fill: false },
+      { label: 'Long context (100K) (C=16)', data: [88399.24, 18866.6], borderColor: '#f59e0b', backgroundColor: '#f59e0b', tension: 0.3, pointRadius: 4, fill: false },
 ] },
   options: { ...base, plugins: { legend: { position: 'top', labels: { font: { size: 10 }, usePointStyle: true } } },
     scales: { y: { title: { display: true, text: 'Median TTFT (ms)', font: { size: 11 } }, grid: lightGrid, border: noBorder },

@@ -28,6 +28,13 @@ def load_data(path):
                         r[k] = float(v) if '.' in v else int(v)
                     except ValueError:
                         r[k] = v
+            # model + gpu_name 조합으로 display_model 생성
+            gpu = r.get('gpu_name', '')
+            model = r.get('model', '')
+            if gpu:
+                r['display_model'] = f"{model} ({gpu})"
+            else:
+                r['display_model'] = model
             rows.append(r)
     return rows
 
@@ -42,7 +49,7 @@ def unique_ordered(rows, key):
 
 
 def models(rows):
-    return unique_ordered(rows, 'model')
+    return unique_ordered(rows, 'display_model')
 
 
 def workloads(rows):
@@ -146,7 +153,7 @@ def generate_html(rows):
     for i, m in enumerate(ms):
         _, tbg, tc = MODEL_BADGES[i % len(MODEL_BADGES)]
         color = MODEL_COLORS[i % len(MODEL_COLORS)]
-        m_rows = [r for r in rows if r['model'] == m]
+        m_rows = [r for r in rows if r['display_model'] == m]
         tps_vals = [r['per_req_tps_mean'] for r in m_rows if isinstance(r.get('per_req_tps_mean'), (int, float)) and r['per_req_tps_mean'] > 0]
         best_tps = f"{max(tps_vals):.1f}" if tps_vals else "—"
         ttft_vals = [r['median_ttft_ms'] for r in m_rows if isinstance(r.get('median_ttft_ms'), (int, float)) and r['median_ttft_ms'] > 0]
@@ -173,7 +180,7 @@ def generate_html(rows):
         _, tbg, tc = MODEL_BADGES[i % len(MODEL_BADGES)]
         first = True
         for r in rows:
-            if r['model'] != m:
+            if r['display_model'] != m:
                 continue
             sep = ' style="border-top:2px solid #e5e7eb"' if first and i > 0 else ''
             first = False
@@ -189,7 +196,7 @@ def generate_html(rows):
         _, tbg, tc = MODEL_BADGES[i % len(MODEL_BADGES)]
         first = True
         for r in rows:
-            if r['model'] != m:
+            if r['display_model'] != m:
                 continue
             sep = ' style="border-top:2px solid #e5e7eb"' if first and i > 0 else ''
             first = False
@@ -206,7 +213,7 @@ def generate_html(rows):
         _, tbg, tc = MODEL_BADGES[i % len(MODEL_BADGES)]
         first = True
         for r in rows:
-            if r['model'] != m:
+            if r['display_model'] != m:
                 continue
             sep = ' style="border-top:2px solid #e5e7eb"' if first and i > 0 else ''
             first = False
@@ -223,7 +230,7 @@ def generate_html(rows):
     for j, wl in enumerate(ws):
         data = []
         for m in ms:
-            v = next((r['per_req_tps_mean'] for r in rows if r['model'] == m and r['workload'] == wl and isinstance(r.get('per_req_tps_mean'), (int, float))), None)
+            v = next((r['per_req_tps_mean'] for r in rows if r['display_model'] == m and r['workload'] == wl and isinstance(r.get('per_req_tps_mean'), (int, float))), None)
             data.append(chart_val(v))
         speed_datasets += f"      {{ label: '{wl_display(wl)}', data: {json.dumps(data)}, backgroundColor: '{ALL_COLORS[j % len(ALL_COLORS)]}', borderRadius: 4 }},\n"
 
@@ -231,7 +238,7 @@ def generate_html(rows):
     for j, wl in enumerate(ws):
         data = []
         for m in ms:
-            v = next((r['median_ttft_ms'] for r in rows if r['model'] == m and r['workload'] == wl and isinstance(r.get('median_ttft_ms'), (int, float))), None)
+            v = next((r['median_ttft_ms'] for r in rows if r['display_model'] == m and r['workload'] == wl and isinstance(r.get('median_ttft_ms'), (int, float))), None)
             data.append(chart_val(v) / 1000 if chart_val(v) else None)
         ttft_datasets += f"      {{ label: '{wl_display(wl)}', data: {json.dumps(data)}, backgroundColor: '{ALL_COLORS[j % len(ALL_COLORS)]}', borderRadius: 4 }},\n"
 
@@ -239,7 +246,7 @@ def generate_html(rows):
     for j, wl in enumerate(ws):
         data = []
         for m in ms:
-            v = next((r['output_throughput'] for r in rows if r['model'] == m and r['workload'] == wl and isinstance(r.get('output_throughput'), (int, float))), None)
+            v = next((r['output_throughput'] for r in rows if r['display_model'] == m and r['workload'] == wl and isinstance(r.get('output_throughput'), (int, float))), None)
             data.append(chart_val(v))
         agg_datasets += f"      {{ label: '{wl_display(wl)}', data: {json.dumps(data)}, backgroundColor: '{ALL_COLORS[j % len(ALL_COLORS)]}', borderRadius: 4 }},\n"
 
@@ -259,7 +266,7 @@ def generate_html(rows):
         mc = r.get('max_concurrency', '')
         if not isinstance(mc, (int, float)):
             continue
-        key = (r['model'], r['workload'], replica_val(r))
+        key = (r['display_model'], r['workload'], replica_val(r))
         sat_groups[key].append(r)
 
     # Filter to groups with 2+ different concurrency values
@@ -335,7 +342,7 @@ new Chart(document.getElementById('{ttft_id}'), {{
         rep = r.get('replica', '')
         if not isinstance(rep, (int, float)):
             continue
-        key = (r['model'], r['workload'], r.get('max_concurrency', ''))
+        key = (r['display_model'], r['workload'], r.get('max_concurrency', ''))
         rep_groups[key].append(r)
 
     rep_groups = {k: sorted(v, key=lambda x: x['replica']) for k, v in rep_groups.items() if len(set(x['replica'] for x in v)) >= 2}
