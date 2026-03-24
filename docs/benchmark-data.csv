@@ -1,2 +1,1 @@
 model,workload,date,gpu_name,gpu_count,replica,quant,gpu_mem_util,max_model_len,max_batched_tokens,max_num_seqs,vllm_version,num_prompts,completed,max_concurrency,request_rate,duration_s,total_input_tokens,total_output_tokens,output_throughput,per_req_tps_mean,per_req_tps_median,per_req_tps_p1,e2e_mean_s,mean_ttft_ms,median_ttft_ms,p99_ttft_ms,mean_tpot_ms,median_tpot_ms,mean_itl_ms,median_itl_ms
-ministral-3b-2512,apps_coding,20260324,RTX-4090,1,2,FP8,0.92,262144,32768,256,,5,5,16,inf,2.74,2696,,463.50,127.1,132.6,89.7,1.898,329.57,345.26,347.88,6.21,6.15,6.17,5.64
