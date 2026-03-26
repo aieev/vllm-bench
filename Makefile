@@ -2,7 +2,7 @@ PYTHON := $(shell test -x .venv/bin/python && echo .venv/bin/python || echo pyth
 RESULTS_DIR := bench-dataset/results
 CSV := docs/benchmark-data.csv
 
-.PHONY: setup bench analyze csv csv-empty report pdf
+.PHONY: setup bench analyze csv csv-empty report pdf test-unit test-func test-all
 
 setup:
 	uv venv && uv pip install "vllm==0.11.0" "transformers<5" huggingface_hub datasets
@@ -25,3 +25,12 @@ report:
 
 pdf:
 	cd /tmp && node html2pdf.mjs $(CURDIR)/docs/benchmark-report.html $(CURDIR)/docs/benchmark-report.pdf
+
+test-unit:
+	$(PYTHON) -m pytest tests/01_unit_static/ -v
+
+test-func:
+	$(PYTHON) -m pytest tests/02_functional/ -v
+
+test-all:
+	$(PYTHON) -m pytest tests/ -v
