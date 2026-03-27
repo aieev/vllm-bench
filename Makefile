@@ -5,7 +5,7 @@ CSV := docs/benchmark-data.csv
 .PHONY: setup bench analyze csv csv-empty report pdf
 
 setup:
-	uv venv && uv pip install vllm huggingface_hub datasets
+	uv venv && uv pip install "vllm==0.11.0" "transformers<5" huggingface_hub datasets
 
 bench:
 	./run-bench-remote.sh all
