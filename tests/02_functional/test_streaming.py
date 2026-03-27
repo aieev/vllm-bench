@@ -1,8 +1,10 @@
+import json
+
 import httpx
 import pytest
 
 
-def test_sse_streaming(base_url, api_key, model_name):
+def test_sse_streaming(base_url, api_key, model_name, extra_body):
     chunks = []
     has_done = False
 
@@ -17,7 +19,7 @@ def test_sse_streaming(base_url, api_key, model_name):
                 "stream": True,
                 "max_tokens": 32,
                 "temperature": 0.0,
-                "chat_template_kwargs": {"enable_thinking": False},
+                **extra_body,
             },
         ) as resp:
             assert resp.status_code == 200
@@ -35,9 +37,7 @@ def test_sse_streaming(base_url, api_key, model_name):
     assert has_done, "Stream did not end with [DONE]"
 
 
-def test_streaming_token_count(base_url, api_key, model_name):
-    import json as _json
-
+def test_streaming_token_count(base_url, api_key, model_name, extra_body):
     content_chunks = 0
 
     with httpx.Client(timeout=30) as http:
@@ -51,7 +51,7 @@ def test_streaming_token_count(base_url, api_key, model_name):
                 "stream": True,
                 "max_tokens": 64,
                 "temperature": 0.0,
-                "chat_template_kwargs": {"enable_thinking": False},
+                **extra_body,
             },
         ) as resp:
             for line in resp.iter_lines():
@@ -60,7 +60,7 @@ def test_streaming_token_count(base_url, api_key, model_name):
                 payload = line[len("data: "):].strip()
                 if payload == "[DONE]":
                     break
-                chunk = _json.loads(payload)
+                chunk = json.loads(payload)
                 choices = chunk.get("choices", [])
                 if not choices:
                     continue
@@ -71,15 +71,13 @@ def test_streaming_token_count(base_url, api_key, model_name):
     assert content_chunks > 0, "No content chunks in stream"
 
 
-def test_streaming_vs_non_streaming(client, base_url, api_key, model_name):
-    import json as _json
-
+def test_streaming_vs_non_streaming(client, base_url, api_key, model_name, extra_body):
     non_stream = client.chat.completions.create(
         model=model_name,
         messages=[{"role": "user", "content": "What is 1+1?"}],
         max_tokens=16,
         temperature=0.0,
-        extra_body={"chat_template_kwargs": {"enable_thinking": False}},
+        extra_body=extra_body,
     )
     non_stream_content = non_stream.choices[0].message.content or ""
 
@@ -95,7 +93,7 @@ def test_streaming_vs_non_streaming(client, base_url, api_key, model_name):
                 "stream": True,
                 "max_tokens": 16,
                 "temperature": 0.0,
-                "chat_template_kwargs": {"enable_thinking": False},
+                **extra_body,
             },
         ) as resp:
             for line in resp.iter_lines():
@@ -104,7 +102,7 @@ def test_streaming_vs_non_streaming(client, base_url, api_key, model_name):
                 payload = line[len("data: "):].strip()
                 if payload == "[DONE]":
                     break
-                chunk = _json.loads(payload)
+                chunk = json.loads(payload)
                 choices = chunk.get("choices", [])
                 if not choices:
                     continue

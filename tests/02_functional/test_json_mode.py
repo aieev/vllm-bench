@@ -2,7 +2,7 @@ import json
 import pytest
 
 
-def test_json_response_format(client, model_name):
+def test_json_response_format(client, model_name, extra_body):
     resp = client.chat.completions.create(
         model=model_name,
         messages=[
@@ -11,7 +11,7 @@ def test_json_response_format(client, model_name):
         response_format={"type": "json_object"},
         max_tokens=128,
         temperature=0.0,
-        extra_body={"chat_template_kwargs": {"enable_thinking": False}},
+        extra_body=extra_body,
     )
     content = resp.choices[0].message.content
     assert content is not None
@@ -19,7 +19,7 @@ def test_json_response_format(client, model_name):
     assert isinstance(parsed, dict)
 
 
-def test_json_schema_validation(client, model_name):
+def test_json_schema_validation(client, model_name, extra_body):
     resp = client.chat.completions.create(
         model=model_name,
         messages=[
@@ -35,7 +35,7 @@ def test_json_schema_validation(client, model_name):
         response_format={"type": "json_object"},
         max_tokens=128,
         temperature=0.0,
-        extra_body={"chat_template_kwargs": {"enable_thinking": False}},
+        extra_body=extra_body,
     )
     content = resp.choices[0].message.content
     assert content is not None
