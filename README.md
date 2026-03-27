@@ -95,29 +95,24 @@ LLM API의 안정성과 성능을 단계별로 검증합니다.
 | 5단계 | Regression | 모델 업데이트 후 지표 비교 | Custom Script |
 
 ```sh
-make test-unit              # 1단계: 서버 로딩 및 기초 검증
-make test-func              # 2단계: 기능적 정확성 검증
-make test-functional        # 기존 standalone 기능 테스트
-make test-all               # 전체 pytest 실행
+make test-unit                        # 1단계: 서버 로딩 및 기초 검증
+make test-func                        # 2단계: 기능적 정확성 검증
+make test-all                         # 전체 pytest 실행
+make test-endpoint EP=qwen3.5-9b-5090 # 특정 엔드포인트만 테스트
+make test-all-endpoints               # endpoints.yaml 전체 엔드포인트 순회
 ```
 
-### 기능 테스트 (Functional Tests)
+엔드포인트 설정은 `endpoints.yaml`에서 관리합니다:
 
-모델의 function calling, 이미지, 비디오 처리 기능을 검증합니다.
-
-```sh
-make test-functional                                       # 전체 테스트
-make test-functional-verbose                               # 상세 출력
-python scripts/test_functional.py --suite function_calling # function calling만
-python scripts/test_functional.py --suite image            # 이미지 처리만
-python scripts/test_functional.py --suite video            # 비디오 처리만
+```yaml
+endpoints:
+  - name: qwen3.5-9b-5090
+    base_url: https://...
+    api_key_env: VLLM_API_KEY_5090
+    gpu: RTX-5090
+    capabilities: [vision]       # vision, video 등 — 미지원 테스트 자동 SKIP
+    suites: [unit, functional]
 ```
-
-| 테스트 Suite | 테스트 항목 | 설명 |
-|-------------|-----------|------|
-| `function_calling` | simple_function_call, multi_tool_selection, structured_tool_output | 도구 호출 정확성 검증 |
-| `image` | image_url_description, image_base64_description | 이미지 인식 기능 검증 |
-| `video` | video_url_description | 비디오 인식 기능 검증 (미지원시 SKIP) |
 
 ### OpenRouter 벤치마크 리포트 생성
 
