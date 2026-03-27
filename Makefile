@@ -2,32 +2,23 @@ PYTHON := $(shell test -x .venv/bin/python && echo .venv/bin/python || echo pyth
 RESULTS_DIR := bench-dataset/results
 CSV := docs/benchmark-data.csv
 
-.PHONY: setup remote-% remote-all analyze csv csv-latest csv-all csv-empty report pdf
+.PHONY: setup bench analyze csv csv-empty report pdf
 
 setup:
 	uv venv && uv pip install vllm huggingface_hub datasets
 
-remote-%:
-	./run-bench-remote.sh $(subst -,_,$*)
-
-remote-all:
+bench:
 	./run-bench-remote.sh all
 
 analyze:
 	$(PYTHON) scripts/analyze_results.py $(RESULTS_DIR)/*.json
 
 csv:
-	@echo "Usage: make csv-latest [N=5]  or  make csv-all"
+	$(PYTHON) scripts/json_to_csv.py $(RESULTS_DIR)/*.json --csv $(CSV)
 
 csv-empty:
 	@head -1 $(CSV) > $(CSV).tmp && mv $(CSV).tmp $(CSV)
 	@echo "✅ $(CSV) emptied (header only)"
-
-csv-latest:
-	$(PYTHON) scripts/json_to_csv.py --latest $(or $(N),1) --csv $(CSV)
-
-csv-all:
-	$(PYTHON) scripts/json_to_csv.py $(RESULTS_DIR)/*.json --csv $(CSV)
 
 report:
 	$(PYTHON) scripts/generate_report.py $(CSV)
