@@ -82,6 +82,38 @@ make analyze
 make csv
 ```
 
+### 테스트 프레임워크 (Test Framework)
+
+LLM API의 안정성과 성능을 단계별로 검증합니다.
+
+| 단계 | 명칭 | 주요 테스트 항목 | 도구 |
+| :--- | :--- | :--- | :--- |
+| 1단계 | Unit & Static | 서버 헬스체크, 모델 로딩, 토크나이저 검증 | `pytest` |
+| 2단계 | Functional | JSON Mode, 스트리밍, Stop Token, Function Calling | `pytest` |
+| 3단계 | Performance | TTFT, TPS, TBT 부하 테스트 | `k6 + xk6-sse` |
+| 4단계 | Monitoring | 실시간 에러율, API 가용성 | Better Stack |
+| 5단계 | Regression | 모델 업데이트 후 지표 비교 | Custom Script |
+
+```sh
+make test-unit                        # 1단계: 서버 로딩 및 기초 검증
+make test-func                        # 2단계: 기능적 정확성 검증
+make test-all                         # 전체 pytest 실행
+make test-endpoint EP=qwen3.5-9b-5090 # 특정 엔드포인트만 테스트
+make test-all-endpoints               # endpoints.yaml 전체 엔드포인트 순회
+```
+
+엔드포인트 설정은 `endpoints.yaml`에서 관리합니다:
+
+```yaml
+endpoints:
+  - name: qwen3.5-9b-5090
+    base_url: https://...
+    api_key_env: VLLM_API_KEY_5090
+    gpu: RTX-5090
+    capabilities: [vision]       # vision, video 등 — 미지원 테스트 자동 SKIP
+    suites: [unit, functional]
+```
+
 ### OpenRouter 벤치마크 리포트 생성
 
 벤치마크 결과를 CSV에 기록하고 HTML/PDF 리포트를 생성합니다.

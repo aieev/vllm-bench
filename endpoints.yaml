@@ -1,0 +1,22 @@
+defaults:
+  timeout: 30
+  disable_thinking: true
+
+endpoints:
+  - name: qwen3.5-9b-4090
+    base_url: https://ap-1.aieev.cloud/ac/7/qwen-3-5-9b-fp8-4090
+    api_key_env: VLLM_API_KEY_4090
+    gpu: RTX-4090
+    suites: [unit, functional]
+
+  - name: qwen3.5-9b-5090
+    base_url: https://ap-1.aieev.cloud/ac/7/qwen3-5-9b-fp8-5090-2
+    api_key_env: VLLM_API_KEY_5090
+    gpu: RTX-5090
+    suites: [unit, functional]
+
+  # - name: qwen3.5-35b-6000pro
+  #   base_url: https://ap-1.aieev.cloud/ac/7/qwen-3-5-35b-a3b-6000pro
+  #   api_key_env: VLLM_API_KEY_6000
+  #   gpu: RTX-6000-PRO
+  #   suites: [unit, functional]
