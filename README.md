@@ -32,7 +32,9 @@ cp .env.example .env
 MODEL_NAME=qwen3.5-9b                                    # 서버에 배포된 모델명
 VLLM_BASE_URL=https://your-server.example.com/endpoint    # 원격 vLLM 서버 URL (필수)
 VLLM_API_KEY=sk-xxx                                       # API 키 (선택)
-VLLM_TOKENIZER=org/tokenizer-name                         # 토크나이저 (선택, 기본값: MODEL_NAME)
+VLLM_TOKENIZER=org/tokenizer-name                         # HuggingFace 토크나이저 이름 (선택, 기본값: MODEL_NAME)
+                                                           # MODEL_NAME이 HF repo명과 다를 때 설정
+                                                           # 예: MODEL_NAME=qwen3.5-9b → VLLM_TOKENIZER=lovedheart/Qwen3.5-9B-FP8
 
 
 # GPU 설정 (결과 JSON에 메타데이터로 저장됨)
@@ -47,30 +49,27 @@ QUANT_OPT=FP8
 
 ### 실행
 
-`MAX_CONCURRENCY`의 기본값은 32입니다.
 
 ```sh
-./run-bench-remote.sh sharegpt                            # 단일
-./run-bench-remote.sh sharegpt mt_bench aimo               # 여러 개
-./run-bench-remote.sh all                                  # 전체 (기본 7개)
-./run-bench-remote.sh random_32k                           # long-context (all 미포함)
+./run-bench-remote.sh apps_coding                         # 단일
+./run-bench-remote.sh apps_coding random_1k random_10k     # 여러 개
+./run-bench-remote.sh all                                  # 전체 (apps_coding, vision_single, random_1k, random_10k, random_100k)
+./run-bench-remote.sh sharegpt                             # all 미포함 워크로드 개별 실행
 
 # 환경변수 오버라이드
-MAX_CONCURRENCY=16 ./run-bench-remote.sh sharegpt          # 동시 요청 수 변경
-REQUEST_RATE=2 ./run-bench-remote.sh sharegpt               # 초당 요청 수 (미설정시 워크로드별 기본값)
-NUM_PROMPTS=50 ./run-bench-remote.sh random_32k             # 요청 수 변경
-
+MAX_CONCURRENCY=16 ./run-bench-remote.sh all               # 동시 요청 수 변경
+REQUEST_RATE=2 ./run-bench-remote.sh apps_coding            # 초당 요청 수 변경
+NUM_PROMPTS=50 ./run-bench-remote.sh random_100k            # 요청 수 변경
 
 # Make
-make remote-sharegpt
-make remote-all
+make bench                                                 # 전체 (= ./run-bench-remote.sh all)
 ```
 
 | 환경변수 | 설명 | 기본값 |
 |----------|------|--------|
 | `MAX_CONCURRENCY` | 최대 동시 요청 수 | 32 |
-| `REQUEST_RATE` | 초당 요청 생성 수 (Poisson) | 워크로드별 기본값 |
-| `NUM_PROMPTS` | 총 요청 수 | 워크로드별 기본값 |
+| `REQUEST_RATE` | 초당 요청 생성 수 (Poisson) | unlimited (미설정시 최대 속도) |
+| `NUM_PROMPTS` | 총 요청 수 | 워크로드별 상이 (sharegpt: 500, mt_bench: 80, blazedit: 50 등) |
 
 
 ### 결과 분석
@@ -79,11 +78,8 @@ make remote-all
 # 전체 결과 비교 (GPU 설정별 그룹핑, 워크로드별 per-request TPS)
 make analyze
 
-# 단일 파일 분석
-python scripts/analyze_results.py bench-dataset/results/some-result.json
-
-# OpenRouter 리포트용 행 생성
-python scripts/analyze_results.py --generate-rows bench-dataset/results/*.json
+# 결과 JSON → CSV 변환 (중복 자동 제외)
+make csv
 ```
 
 ### OpenRouter 벤치마크 리포트 생성
@@ -92,16 +88,16 @@ python scripts/analyze_results.py --generate-rows bench-dataset/results/*.json
 
 ```sh
 # 1. 벤치마크 실행 (OpenRouter 제출용 5개 워크로드)
-MAX_CONCURRENCY=16 NUM_PROMPTS=500 ./run-bench-remote.sh apps_coding vision_single random_1k random_10k random_100k
+make bench
 
-# 2. 결과를 CSV에 기록
-#    docs/benchmark-data.csv 에 데이터 입력
+# 2. 결과 JSON → CSV (중복 자동 제외)
+make csv
 
 # 3. HTML 리포트 생성
-python scripts/generate_report.py docs/benchmark-data.csv
+make report
 
 # 4. PDF 변환
-cd /tmp && node html2pdf.mjs /path/to/benchmark-report.html /path/to/benchmark-report.pdf
+make pdf
 ```
 
 #### OpenRouter 제출용 워크로드 (Artificial Analysis 기준)
@@ -116,10 +112,9 @@ cd /tmp && node html2pdf.mjs /path/to/benchmark-report.html /path/to/benchmark-r
 
 #### CSV 데이터 형식
 
-`docs/benchmark-data.csv`:
+`docs/benchmark-data.csv` — `make csv`로 자동 생성 (중복 자동 제외):
 ```
-model,workload,num_prompts,max_concurrency,request_rate,output_throughput,per_req_tps_mean,per_req_tps_median,mean_ttft_ms,median_ttft_ms,p99_ttft_ms,mean_tpot_ms,median_tpot_ms,mean_itl_ms,median_itl_ms
-Qwen3.5-9B,apps_coding,50,16,inf,206.51,38.1,51.8,...
+model,workload,date,gpu_name,gpu_count,replica,quant,gpu_mem_util,max_model_len,max_batched_tokens,max_num_seqs,vllm_version,num_prompts,completed,max_concurrency,request_rate,duration_s,total_input_tokens,total_output_tokens,output_throughput,per_req_tps_mean,per_req_tps_median,per_req_tps_p1,e2e_mean_s,mean_ttft_ms,median_ttft_ms,p99_ttft_ms,mean_tpot_ms,median_tpot_ms,mean_itl_ms,median_itl_ms
 ```
 
 ### 전체 워크로드 목록
@@ -130,7 +125,7 @@ Qwen3.5-9B,apps_coding,50,16,inf,206.51,38.1,51.8,...
 | `vision_single` | Random-MM (1MP image) | 500 | 비전 벤치마크 (OpenRouter용) |
 | `random_1k` | Random (1K input) | 500 | Short context (OpenRouter용) |
 | `random_10k` | Random (10K input) | 500 | Medium context (OpenRouter용) |
-| `random_100k` | Random (100K input) | 500 | Long context (OpenRouter용) |
+| `random_100k` | Random (100K input) | 50 | Long context (OpenRouter용) |
 | `sharegpt` | ShareGPT_V3 | 500 | 실제 대화 데이터 |
 | `prefix_repetition` | 내장 생성 | 500 | Prefix caching 효과 측정 |
 | `instructor_coder` | InstructCoder (HF) | 500 | 코드 생성 |

@@ -116,14 +116,41 @@ def extract_row(path):
     return row
 
 
+def _row_key(row):
+    return (row.get('model'), row.get('workload'), row.get('date'),
+            row.get('max_concurrency'), row.get('request_rate'))
+
+
+def _load_existing_keys(csv_path):
+    keys = set()
+    if not Path(csv_path).exists() or os.path.getsize(csv_path) == 0:
+        return keys
+    with open(csv_path, newline='') as f:
+        for row in csv.DictReader(f):
+            keys.add(_row_key(row))
+    return keys
+
+
 def append_to_csv(rows, csv_path=CSV_PATH):
-    exists = Path(csv_path).exists()
+    existing = _load_existing_keys(csv_path)
+    new_rows = [r for r in rows if _row_key(r) not in existing]
+    skipped = len(rows) - len(new_rows)
+
+    if skipped:
+        print(f"  ⏭️  {skipped} duplicate(s) skipped")
+
+    if not new_rows:
+        print("No new rows to add.")
+        return 0
+
+    exists = Path(csv_path).exists() and os.path.getsize(csv_path) > 0
     with open(csv_path, 'a', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=CSV_HEADERS)
-        if not exists or os.path.getsize(csv_path) == 0:
+        if not exists:
             writer.writeheader()
-        for row in rows:
+        for row in new_rows:
             writer.writerow(row)
+    return len(new_rows)
 
 
 def main():
@@ -169,8 +196,9 @@ def main():
         for row in rows:
             print(','.join(row.get(h, '') for h in CSV_HEADERS))
     else:
-        append_to_csv(rows, args.csv)
-        print(f"\n✅ {len(rows)} rows appended to {args.csv}")
+        added = append_to_csv(rows, args.csv)
+        if added:
+            print(f"\n✅ {added} rows appended to {args.csv}")
 
 
 if __name__ == '__main__':

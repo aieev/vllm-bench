@@ -223,7 +223,7 @@ random_100k() {
     --dataset-name random \
     --random-input-len 102400 \
     --random-output-len 256 \
-    $(_default_prompts 500)
+    $(_default_prompts 50)
 }
 
 
