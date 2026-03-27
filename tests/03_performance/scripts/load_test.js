@@ -48,6 +48,7 @@ export default function () {
     stream: true,
     max_tokens: 256,
     temperature: 0.0,
+    chat_template_kwargs: { enable_thinking: false },
   });
 
   const params = {

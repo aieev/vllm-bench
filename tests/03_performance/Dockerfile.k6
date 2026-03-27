@@ -1,5 +1,5 @@
-FROM grafana/xk6:latest AS builder
-RUN xk6 build --with github.com/phymbert/xk6-sse@latest
+FROM grafana/xk6:0.13.2 AS builder
+RUN xk6 build --with github.com/phymbert/xk6-sse@v0.4.0
 
 FROM alpine:3.19
 COPY --from=builder /xk6/k6 /usr/bin/k6
